@@ -1,0 +1,54 @@
+{
+  "name": "syllable",
+  "version": "0.0.1",
+  "description": "Get the syllable count in an English word",
+  "license": "MIT",
+  "keywords": [
+    "detect",
+    "syllables",
+    "natural",
+    "language"
+  ],
+  "dependencies": {
+    "pluralize": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^0.8.0",
+    "istanbul": "^0.3.0",
+    "jscs": "^1.5.3",
+    "mocha": "^1.20.0"
+  },
+  "author": "Titus Wormer <tituswormer@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/syllable.git"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports spec/syllable.spec.js",
+    "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports spec/syllable.spec.js",
+    "lint": "npm run lint-api && npm run lint-test && npm run lint-style",
+    "lint-api": "node_modules/.bin/eslint index.js --env node --env browser --rule 'quotes: [2, single], no-cond-assign: false'",
+    "lint-test": "node_modules/.bin/eslint spec/syllable.spec.js --env node --env mocha --rule 'quotes: [2, single], no-loop-func: false'",
+    "lint-style": "node_modules/.bin/jscs index.js spec/syllable.spec.js --reporter=inline",
+    "install-browser-test": "npm install browserify",
+    "build-browser-test": "node_modules/.bin/browserify spec/syllable.spec.js -o spec/browser.spec.js",
+    "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- spec/syllable.spec.js",
+    "make": "npm run lint && npm run coverage"
+  },
+  "testling": {
+    "files": "spec/syllable.spec.js",
+    "harness": "mocha",
+    "browsers": [
+      "iexplore/latest",
+      "chrome/latest",
+      "chrome/canary",
+      "firefox/latest",
+      "firefox/nightly",
+      "opera/latest",
+      "opera/next",
+      "safari/latest",
+      "iphone/latest",
+      "android-browser/latest"
+    ]
+  }
+}

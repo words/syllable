@@ -1,0 +1,32 @@
+{
+  "name": "syllable",
+  "main": "index.js",
+  "description": "Get the syllable count in an English word",
+  "license": "MIT",
+  "keywords": [
+    "detect",
+    "syllables",
+    "natural",
+    "language"
+  ],
+  "dependencies": {
+    "pluralize": "^1.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/syllable.git"
+  },
+  "authors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "ignore": [
+    ".*",
+    "*.log",
+    "*.md",
+    "component.json",
+    "package.json",
+    "coverage",
+    "node_modules",
+    "spec"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "syllable",
+  "version": "0.0.1",
+  "description": "Get the syllable count in an English word",
+  "license": "MIT",
+  "keywords": [
+    "detect",
+    "syllables",
+    "natural",
+    "language"
+  ],
+  "dependencies": {
+    "blakeembrey/pluralize": "^1.0.1"
+  },
+  "scripts": [
+    "index.js"
+  ],
+  "json": [
+    "data/problematic.json"
+  ],
+  "repository": "wooorm/syllable"
+}

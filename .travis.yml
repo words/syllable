@@ -1,0 +1,13 @@
+language: node_js
+script: npm run-script test-travis
+node_js:
+- '0.10'
+- '0.11'
+after_script: npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls
+deploy:
+  provider: npm
+  email: tituswormer@gmail.com
+  api_key:
+    secure: gfnIxVBfKpsLXRlj3cXvXHyJiXa2CZPFgWEXALIMKJo5LMMS22pYte/4HAYZDQpPAtIW0w1Ke5j5hEL1/NfdFZbiWMnTbT5nBt7gj9WPSKGt4XIK22evuw3gkdsH4AtUrfkd+7VUoo0PN/poVcFdESXipbcmOd2RZZgARySXmFg=
+  on:
+    repo: wooorm/syllable
