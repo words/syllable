@@ -23,6 +23,8 @@
     ".*",
     "*.log",
     "*.md",
+    "components",
+    "build",
     "component.json",
     "package.json",
     "coverage",
