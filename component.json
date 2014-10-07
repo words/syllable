@@ -10,13 +10,13 @@
     "language"
   ],
   "dependencies": {
-    "blakeembrey/pluralize": "^1.0.1"
+    "blakeembrey/pluralize": "v1.0.2"
   },
+  "repository": "wooorm/syllable",
   "scripts": [
     "index.js"
   ],
   "json": [
     "data/problematic.json"
-  ],
-  "repository": "wooorm/syllable"
+  ]
 }

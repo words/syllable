@@ -10,7 +10,7 @@
     "language"
   ],
   "dependencies": {
-    "pluralize": "^1.0.1"
+    "pluralize": "^1.0.2"
   },
   "repository": {
     "type": "git",
