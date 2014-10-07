@@ -31,6 +31,22 @@ syllable("hihi"); // 2
 syllable("mmmmmmmmmmmmmmmm"); // 1
 ```
 
+## Benchmark
+
+On a MacBook Air, it runs about 57,000 words per second.
+
+
+```
+          syllable — this module
+  57 op/s » op/s * 1,000
+
+          syllablistic
+  37 op/s » op/s * 1,000
+
+          text-statistics
+  51 op/s » op/s * 1,000
+```
+
 ## Inspiration
 
 Based on the syllable functionality found in [**Text-Statistics**](https://github.com/DaveChild/Text-Statistics) (PHP), in turn inspired by [Lingua-EN-Syllable](http://search.cpan.org/~gregfast/Lingua-EN-Syllable-0.251/) (Perl).
