@@ -28,7 +28,7 @@
     "components/",
     "coverage/",
     "node_modules/",
-    "spec/",
+    "test/",
     "component.json",
     "package.json"
   ]
