@@ -1,9 +1,34 @@
 'use strict';
 
-var pluralize,
-    has,
-    MAP_PROBLEMATIC,
-    EXPRESSION_SINGLE,
+/**
+ * Dependencies.
+ */
+
+var pluralize;
+
+pluralize = require('pluralize');
+
+/**
+ * A (small) map of problematic values.
+ */
+
+var MAP_PROBLEMATIC;
+
+MAP_PROBLEMATIC = require('./data/problematic.json');
+
+/**
+ * Cached methods.
+ */
+
+var has;
+
+has = Object.prototype.hasOwnProperty;
+
+/**
+ * Constant expressions.
+ */
+
+var EXPRESSION_SINGLE,
     EXPRESSION_DOUBLE,
     EXPRESSION_TRIPLE,
     EXPRESSION_NONALPHABETIC,
@@ -15,27 +40,9 @@ var pluralize,
     EXPRESSION_DOUBLE_SYLLABIC_FOUR;
 
 /**
- * A (small) map of problematic values.
- */
-
-MAP_PROBLEMATIC = require('./data/problematic.json');
-
-/**
- * To singularize problematic values.
- */
-
-pluralize = require('pluralize');
-
-/**
- * Cache `Object#hasOwnProperty`, used instead of the `in` operator to not
- * fail on given values such as `constructor` or `prototype`.
- */
-
-has = Object.prototype.hasOwnProperty;
-
-/**
- * Two expressions of occurances which normally would be counted as two
- * syllables, but should be counted as one.
+ * Two expressions of occurances which normally would
+ * be counted as two syllables, but should be counted
+ * as one.
  */
 
 EXPRESSION_MONOSYLLABIC_ONE = new RegExp(
@@ -184,8 +191,8 @@ EXPRESSION_MONOSYLLABIC_TWO = new RegExp(
 );
 
 /**
- * Four expression of occurances which normally would be counted as one
- * syllable, but should be counted as two.
+ * Four expression of occurances which normally would be
+ * counted as one syllable, but should be counted as two.
  */
 
 EXPRESSION_DOUBLE_SYLLABIC_ONE = new RegExp(
@@ -246,7 +253,7 @@ EXPRESSION_DOUBLE_SYLLABIC_THREE = new RegExp(
 EXPRESSION_DOUBLE_SYLLABIC_FOUR = /[^s]ia/;
 
 /**
- * An expression to match single syllable pre- and suffixes.
+ * Expression to match single syllable pre- and suffixes.
  */
 
 EXPRESSION_SINGLE = new RegExp(
@@ -287,7 +294,7 @@ EXPRESSION_SINGLE = new RegExp(
 );
 
 /**
- * An expression to match double syllable pre- and suffixes.
+ * Expression to match double syllable pre- and suffixes.
  */
 
 EXPRESSION_DOUBLE = new RegExp(
@@ -328,19 +335,20 @@ EXPRESSION_DOUBLE = new RegExp(
 );
 
 /**
- * An expression to match triple syllable suffixes.
+ * Expression to match triple syllable suffixes.
  */
 
 EXPRESSION_TRIPLE = /(ology|ologist|onomy|onomist)$/g;
 
 /**
- * An expression to remove non-alphabetic characters from a given value.
+ * Expression to remove non-alphabetic characters from
+ * a given value.
  */
 
 EXPRESSION_NONALPHABETIC = /[^a-z]/g;
 
 /**
- * Get the syllables in a given value.
+ * Get syllables in a given value.
  *
  * @param {string} value
  * @return {string}
@@ -355,7 +363,9 @@ function syllable(value) {
         addOne,
         subtractOne;
 
-    value = String(value).toLowerCase().replace(EXPRESSION_NONALPHABETIC, '');
+    value = String(value)
+        .toLowerCase()
+        .replace(EXPRESSION_NONALPHABETIC, '');
 
     count = 0;
 
@@ -372,7 +382,8 @@ function syllable(value) {
     }
 
     /**
-     * If the word is a hard to count, it might be in `MAP_PROBLEMATIC`.
+     * If `value` is a hard to count, it might be
+     * in `MAP_PROBLEMATIC`.
      */
 
     if (has.call(MAP_PROBLEMATIC, value)) {
@@ -380,7 +391,8 @@ function syllable(value) {
     }
 
     /**
-     * Additionally, the singular word might be in `MAP_PROBLEMATIC`.
+     * Additionally, the singular word might be
+     * in `MAP_PROBLEMATIC`.
      */
 
     singular = pluralize(value, 1);
@@ -390,12 +402,14 @@ function syllable(value) {
     }
 
     /**
-     * Define scoped counters, to be used in `String#replace()` calls.
+     * Define scoped counters, to be used
+     * in `String#replace()` calls.
      */
 
     function countFactory(addition) {
         return function () {
             count += addition;
+
             return '';
         };
     }
@@ -403,6 +417,7 @@ function syllable(value) {
     function returnFactory(addition) {
         return function ($0) {
             count += addition;
+
             return $0;
         };
     }
@@ -411,7 +426,8 @@ function syllable(value) {
     subtractOne = returnFactory(-1);
 
     /**
-     * Count some prefixes and suffixes, and remove their matched ranges.
+     * Count some prefixes and suffixes, and remove
+     * their matched ranges.
      */
 
     value = value
@@ -434,8 +450,8 @@ function syllable(value) {
     }
 
     /**
-     * Subtract one for occurances which should be counted as one (but are
-     * counted as two).
+     * Subtract one for occurances which should be
+     * counted as one (but are counted as two).
      */
 
     value
@@ -443,8 +459,8 @@ function syllable(value) {
         .replace(EXPRESSION_MONOSYLLABIC_TWO, subtractOne);
 
     /**
-     * Add one for occurances which should be counted as two (but are
-     * counted as one).
+     * Add one for occurances which should be counted
+     * as two (but are counted as one).
      */
 
     value
@@ -461,7 +477,7 @@ function syllable(value) {
 }
 
 /**
- * Export `syllable`.
+ * Expose `syllable`.
  */
 
 module.exports = syllable;
