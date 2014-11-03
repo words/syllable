@@ -1,37 +1,36 @@
 'use strict';
 
-var syllable,
-    words,
-    syllablistic,
-    Statistics,
-    statistics;
-
 /**
- * Module dependencies.
+ * Dependencies.
  */
 
-syllable = require('..');
+var syllable;
+
+syllable = require('./');
 
 /**
  * Optional dependencies.
  */
 
+var syllablistic,
+    Statistics,
+    statistics,
+    hasException;
+
 try {
     syllablistic = require('syllablistic');
 } catch (error) {
-    console.log(
-        '\u001B[0;31m' +
-        '  The libraries needed by this benchmark could not be found. ' +
-        '  Please execute:\n' +
-        '    npm run install-benchmark\n' +
-        '\u001B[0m'
-    );
+    hasException = true;
 }
 
 try {
     Statistics = require('text-statistics');
     statistics = new Statistics();
 } catch (error) {
+    hasException = true;
+}
+
+if (hasException) {
     console.log(
         '\u001B[0;31m' +
         '  The libraries needed by this benchmark could not be found. ' +
@@ -42,11 +41,15 @@ try {
 }
 
 /**
+ * Fixtures.
+ *
  * The first 1000 words from Letterpress:
  *   https://github.com/atebits/Words
  */
 
-words = [
+var fixtures;
+
+fixtures = [
     'aa',
     'aah',
     'aahed',
@@ -1050,13 +1053,22 @@ words = [
 ];
 
 /**
+ * Helper to loop over all fixtures.
+ */
+
+function eachFixture(callback) {
+    fixtures.forEach(callback);
+}
+
+
+/**
  * Benchmark this module.
  */
 
 suite('syllable — this module', function () {
     bench('op/s * 1,000', function () {
-        words.forEach(function (word) {
-            syllable(word);
+        eachFixture(function (fixture) {
+            syllable(fixture);
         });
     });
 });
@@ -1068,8 +1080,8 @@ suite('syllable — this module', function () {
 if (syllablistic) {
     suite('syllablistic', function () {
         bench('op/s * 1,000', function () {
-            words.forEach(function (word) {
-                syllablistic.word(word);
+            eachFixture(function (fixture) {
+                syllablistic.word(fixture);
             });
         });
     });
@@ -1082,8 +1094,8 @@ if (syllablistic) {
 if (syllablistic) {
     suite('text-statistics', function () {
         bench('op/s * 1,000', function () {
-            words.forEach(function (word) {
-                statistics.syllableCount(word);
+            eachFixture(function (fixture) {
+                statistics.syllableCount(fixture);
             });
         });
     });
