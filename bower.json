@@ -1,7 +1,7 @@
 {
   "name": "syllable",
   "main": "index.js",
-  "description": "Get the syllable count in an English word",
+  "description": "Syllable count in an English word",
   "license": "MIT",
   "keywords": [
     "detect",
