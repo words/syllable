@@ -1,4 +1,4 @@
-# syllable [![Build Status](https://travis-ci.org/wooorm/syllable.svg?branch=master)](https://travis-ci.org/wooorm/syllable) [![Coverage Status](https://img.shields.io/coveralls/wooorm/syllable.svg)](https://coveralls.io/r/wooorm/syllable?branch=master)
+# syllable [![Build Status](https://img.shields.io/travis/wooorm/syllable.svg?style=flat)](https://travis-ci.org/wooorm/syllable) [![Coverage Status](https://img.shields.io/coveralls/wooorm/syllable.svg?style=flat)](https://coveralls.io/r/wooorm/syllable?branch=master)
 
 Get syllable count in JavaScript.
 
