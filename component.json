@@ -10,7 +10,7 @@
     "language"
   ],
   "dependencies": {
-    "blakeembrey/pluralize": "v1.0.2"
+    "blakeembrey/pluralize": "^1.0.0"
   },
   "repository": "wooorm/syllable",
   "scripts": [
