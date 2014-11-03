@@ -1,12 +1,16 @@
 'use strict';
 
 /**
- * Module dependencies (syllable, assert) and fixtures.
+ * Dependencies.
  */
 
-var syllable = require('..'),
-    fixtures = require('./fixture.json'),
-    assert = require('assert');
+var syllable,
+    fixtures,
+    assert;
+
+syllable = require('..');
+fixtures = require('./fixture.json');
+assert = require('assert');
 
 /**
  * The unit tests include in- and output values provided by the original,
@@ -24,12 +28,14 @@ var syllable = require('..'),
  */
 
 describe('syllable()', function () {
-    it('should be of type `function`', function () {
+    it('should be a `function`', function () {
         assert(typeof syllable === 'function');
     });
 
     it('should be case insensitive', function () {
-        var result = syllable('syllables');
+        var result;
+
+        result = syllable('syllables');
 
         assert(syllable('SYLLABLES') === result);
         assert(syllable('SyLlABlEs') === result);
@@ -45,15 +51,16 @@ describe('syllable()', function () {
         assert(syllable('mmmm') === 1);
         assert(syllable('am') === 1);
     });
+});
 
-    var values = Object.keys(fixtures);
+describe('fixtures', function () {
+    var values;
+
+    values = Object.keys(fixtures);
 
     it('should work on ' + values.length + ' fixtures', function () {
         values.forEach(function (value) {
-            var syllables = syllable(value),
-                count = fixtures[value];
-
-            assert(syllables === count);
+            assert(syllable(value) === fixtures[value]);
         });
     });
 });
