@@ -1,5 +1,5 @@
 
-n.n.n / 2014-11-03
+0.1.1 / 2014-11-03
 ==================
 
  * Refactor npm script target order in `package.json`
