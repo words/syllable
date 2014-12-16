@@ -1,4 +1,16 @@
 
+n.n.n / 2014-12-16
+==================
+
+ * Add CLI
+ * Refactor to adhere to strict jsdoc style
+ * Add jscs-jsdoc configuration to `.jscs.json`
+ * Add jscs-jsdoc as a dev-dependency
+ * Refactor npm script targets in `package.json`
+ * Add link to personal website to copyright in `Readme.md`
+ * Fix incorrect executive rights on `test/index.js`
+ * Update eslint, matcha
+
 0.1.1 / 2014-11-03
 ==================
 
