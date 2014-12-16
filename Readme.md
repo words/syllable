@@ -5,17 +5,17 @@ Syllable count in JavaScript.
 ## Installation
 
 npm:
-```sh
+```bash
 $ npm install syllable
 ```
 
 Component:
-```sh
+```bash
 $ component install wooorm/syllable
 ```
 
 Bower:
-```sh
+```bash
 $ bower install syllable
 ```
 
@@ -29,6 +29,35 @@ syllable("unicorn"); // 3
 syllable("hi"); // 1
 syllable("hihi"); // 2
 syllable("mmmmmmmmmmmmmmmm"); // 1
+```
+
+## CLI
+
+Install:
+```bash
+$ npm install --global syllable
+```
+
+Use:
+```
+Usage: syllable [options] words...
+
+Syllable count in an English word
+
+Options:
+
+  -h, --help           output usage information
+  -v, --version        output version number
+
+Usage:
+
+# output syllables for words
+$ syllable syllable unicorn
+# 6
+
+# output syllables for words from stdin
+$ echo "syllable unicorn banana" | syllable
+# 9
 ```
 
 ## Benchmark

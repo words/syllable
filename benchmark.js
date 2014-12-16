@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -8,7 +8,7 @@ var syllable;
 
 syllable = require('./');
 
-/**
+/*
  * Optional dependencies.
  */
 
@@ -40,7 +40,7 @@ if (hasException) {
     );
 }
 
-/**
+/*
  * Fixtures.
  *
  * The first 1000 words from Letterpress:
@@ -1054,14 +1054,14 @@ fixtures = [
 
 /**
  * Helper to loop over all fixtures.
+ *
+ * @param {function(string)} callback
  */
-
 function eachFixture(callback) {
     fixtures.forEach(callback);
 }
 
-
-/**
+/*
  * Benchmark this module.
  */
 
@@ -1073,7 +1073,7 @@ suite('syllable — this module', function () {
     });
 });
 
-/**
+/*
  * Benchmark syllablistic.
  */
 
@@ -1087,7 +1087,7 @@ if (syllablistic) {
     });
 }
 
-/**
+/*
  * Benchmark text-statistics.
  */
 

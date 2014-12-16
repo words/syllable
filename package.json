@@ -7,7 +7,9 @@
     "detect",
     "syllables",
     "natural",
-    "language"
+    "language",
+    "cli",
+    "bin"
   ],
   "dependencies": {
     "pluralize": "^1.0.0"
@@ -17,6 +19,9 @@
     "url": "https://github.com/wooorm/syllable.git"
   },
   "author": "Titus Wormer <tituswormer@gmail.com>",
+  "bin": {
+    "syllable": "cli.js"
+  },
   "devDependencies": {
     "eslint": "^0.10.0",
     "istanbul": "^0.3.0",
@@ -27,13 +32,16 @@
   },
   "scripts": {
     "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports test/index.js",
-    "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports test/index.js",
+    "test-cli": "bash ./test/index.sh",
+    "test-coveralls": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports test/index.js",
+    "test-travis": "npm run test-cli && npm run test-coveralls",
     "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- test/index.js",
     "lint-api": "node_modules/.bin/eslint index.js",
+    "lint-cli": "node_modules/.bin/eslint cli.js --rule 'no-process-exit: false'",
     "lint-test": "node_modules/.bin/eslint test/index.js --env mocha",
     "lint-benchmark": "node_modules/.bin/eslint benchmark.js --global suite,set,bench",
-    "lint-style": "node_modules/.bin/jscs index.js test/index.js --reporter=inline",
-    "lint": "npm run lint-api && npm run lint-benchmark && npm run lint-test && npm run lint-style",
+    "lint-style": "node_modules/.bin/jscs index.js benchmark.js cli.js test/index.js --reporter=inline",
+    "lint": "npm run lint-api && npm run lint-benchmark && npm run lint-cli && npm run lint-test && npm run lint-style",
     "make": "npm run lint && npm run coverage",
     "install-benchmark": "npm install syllablistic text-statistics",
     "benchmark": "node_modules/.bin/matcha benchmark.js"
