@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -8,7 +8,7 @@ var pluralize;
 
 pluralize = require('pluralize');
 
-/**
+/*
  * A (small) map of problematic values.
  */
 
@@ -16,7 +16,7 @@ var MAP_PROBLEMATIC;
 
 MAP_PROBLEMATIC = require('./data/problematic.json');
 
-/**
+/*
  * Cached methods.
  */
 
@@ -24,7 +24,7 @@ var has;
 
 has = Object.prototype.hasOwnProperty;
 
-/**
+/*
  * Constant expressions.
  */
 
@@ -39,8 +39,8 @@ var EXPRESSION_SINGLE,
     EXPRESSION_DOUBLE_SYLLABIC_THREE,
     EXPRESSION_DOUBLE_SYLLABIC_FOUR;
 
-/**
- * Two expressions of occurances which normally would
+/*
+ * Two expressions of occurrences which normally would
  * be counted as two syllables, but should be counted
  * as one.
  */
@@ -190,8 +190,8 @@ EXPRESSION_MONOSYLLABIC_TWO = new RegExp(
     'g'
 );
 
-/**
- * Four expression of occurances which normally would be
+/*
+ * Four expression of occurrences which normally would be
  * counted as one syllable, but should be counted as two.
  */
 
@@ -252,7 +252,7 @@ EXPRESSION_DOUBLE_SYLLABIC_THREE = new RegExp(
 
 EXPRESSION_DOUBLE_SYLLABIC_FOUR = /[^s]ia/;
 
-/**
+/*
  * Expression to match single syllable pre- and suffixes.
  */
 
@@ -293,7 +293,7 @@ EXPRESSION_SINGLE = new RegExp(
     'g'
 );
 
-/**
+/*
  * Expression to match double syllable pre- and suffixes.
  */
 
@@ -334,13 +334,13 @@ EXPRESSION_DOUBLE = new RegExp(
     'g'
 );
 
-/**
+/*
  * Expression to match triple syllable suffixes.
  */
 
 EXPRESSION_TRIPLE = /(ology|ologist|onomy|onomist)$/g;
 
-/**
+/*
  * Expression to remove non-alphabetic characters from
  * a given value.
  */
@@ -351,9 +351,8 @@ EXPRESSION_NONALPHABETIC = /[^a-z]/g;
  * Get syllables in a given value.
  *
  * @param {string} value
- * @return {string}
+ * @return {number}
  */
-
 function syllable(value) {
     var iterator,
         length,
@@ -373,7 +372,7 @@ function syllable(value) {
         return count;
     }
 
-    /**
+    /*
      * Return early when possible.
      */
 
@@ -381,7 +380,7 @@ function syllable(value) {
         return 1;
     }
 
-    /**
+    /*
      * If `value` is a hard to count, it might be
      * in `MAP_PROBLEMATIC`.
      */
@@ -390,7 +389,7 @@ function syllable(value) {
         return MAP_PROBLEMATIC[value];
     }
 
-    /**
+    /*
      * Additionally, the singular word might be
      * in `MAP_PROBLEMATIC`.
      */
@@ -401,11 +400,16 @@ function syllable(value) {
         return MAP_PROBLEMATIC[singular];
     }
 
-    /**
-     * Define scoped counters, to be used
-     * in `String#replace()` calls.
-     */
-
+   /**
+    * Define scoped counters, to be used
+    * in `String#replace()` calls.
+    *
+    * The scoped counter removes the matched value
+    * from the input.
+    *
+    * @param {number} addition
+    * @return {function(): string}
+    */
     function countFactory(addition) {
         return function () {
             count += addition;
@@ -414,6 +418,16 @@ function syllable(value) {
         };
     }
 
+   /**
+    * Define scoped counters, to be used
+    * in `String#replace()` calls.
+    *
+    * The scoped counter does not remove the matched
+    * value from the input.
+    *
+    * @param {number} addition
+    * @return {function(): string}
+    */
     function returnFactory(addition) {
         return function ($0) {
             count += addition;
@@ -425,7 +439,7 @@ function syllable(value) {
     addOne = returnFactory(1);
     subtractOne = returnFactory(-1);
 
-    /**
+    /*
      * Count some prefixes and suffixes, and remove
      * their matched ranges.
      */
@@ -435,7 +449,7 @@ function syllable(value) {
         .replace(EXPRESSION_DOUBLE, countFactory(2))
         .replace(EXPRESSION_SINGLE, countFactory(1));
 
-    /**
+    /*
      * Count multiple consonants.
      */
 
@@ -449,8 +463,8 @@ function syllable(value) {
         }
     }
 
-    /**
-     * Subtract one for occurances which should be
+    /*
+     * Subtract one for occurrences which should be
      * counted as one (but are counted as two).
      */
 
@@ -458,8 +472,8 @@ function syllable(value) {
         .replace(EXPRESSION_MONOSYLLABIC_ONE, subtractOne)
         .replace(EXPRESSION_MONOSYLLABIC_TWO, subtractOne);
 
-    /**
-     * Add one for occurances which should be counted
+    /*
+     * Add one for occurrences which should be counted
      * as two (but are counted as one).
      */
 
@@ -469,14 +483,14 @@ function syllable(value) {
         .replace(EXPRESSION_DOUBLE_SYLLABIC_THREE, addOne)
         .replace(EXPRESSION_DOUBLE_SYLLABIC_FOUR, addOne);
 
-    /**
+    /*
      * Make sure at least on is returned.
      */
 
     return count || 1;
 }
 
-/**
+/*
  * Expose `syllable`.
  */
 
