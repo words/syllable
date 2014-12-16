@@ -53,4 +53,4 @@ Based on the syllable functionality found in [**Text-Statistics**](https://githu
 
 ## License
 
-MIT © Titus Wormer
+MIT © [Titus Wormer](http://wooorm.com)
