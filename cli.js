@@ -12,6 +12,14 @@ syllable = require('./');
 pack = require('./package.json');
 
 /*
+ * Detect if a value is expected to be piped in.
+ */
+
+var expextPipeIn;
+
+expextPipeIn = !process.stdin.isTTY;
+
+/*
  * Arguments.
  */
 
@@ -28,33 +36,6 @@ var command;
 command = Object.keys(pack.bin)[0];
 
 /**
- * Help.
- */
-function help() {
-    return [
-        '',
-        'Usage: ' + command + ' [options] words...',
-        '',
-        pack.description,
-        '',
-        'Options:',
-        '',
-        '  -h, --help           output usage information',
-        '  -v, --version        output version number',
-        '',
-        'Usage:',
-        '',
-        '# output syllables for words',
-        '$ ' + command + ' syllable unicorn',
-        '# 6',
-        '',
-        '# output syllables for words from stdin',
-        '$ echo "syllable unicorn banana" | ' + command,
-        '# 9'
-    ].join('\n  ') + '\n';
-}
-
-/**
  * Add `a` to `b`.
  *
  * @param {number} a
@@ -66,13 +47,53 @@ function sum(a, b) {
 }
 
 /**
- * Get the syllables of a list of words.
+ * Get the syllables for multiple words.
  *
  * @param {Array.<string>} values
+ * @return {number}
  */
-function getSyllables(values) {
-    if (values.length) {
-        console.log(values.map(syllable).reduce(sum));
+function syllables(values) {
+    return values.map(syllable).reduce(sum);
+}
+
+/**
+ * Help.
+ *
+ * @return {string}
+ */
+function help() {
+    return [
+        '',
+        'Usage: ' + command + ' [options] <words...>',
+        '',
+        pack.description,
+        '',
+        'Options:',
+        '',
+        '  -h, --help           output usage information',
+        '  -v, --version        output version number',
+        '',
+        'Usage:',
+        '',
+        '# output syllables',
+        '$ ' + command + ' syllable unicorn',
+        '# ' + syllables(['syllable', 'unicorn']),
+        '',
+        '# output syllables from stdin',
+        '$ echo "syllable unicorn banana" | ' + command,
+        '# ' + syllables(['syllable', 'unicorn', 'banana']),
+        ''
+    ].join('\n  ') + '\n';
+}
+
+/**
+ * Get the syllables in a document.
+ *
+ * @param {string?} value
+ */
+function getSyllables(value) {
+    if (value) {
+        console.log(syllables(value.split(/\s+/g)));
     } else {
         process.stderr.write(help());
         process.exit(1);
@@ -93,12 +114,14 @@ if (
     argv.indexOf('-v') !== -1
 ) {
     console.log(pack.version);
-} else if (argv[0]) {
-    getSyllables(argv.join(' ').split(/\s+/g));
+} else if (argv.length) {
+    getSyllables(argv.join(' '));
+} else if (!expextPipeIn) {
+    getSyllables();
 } else {
     process.stdin.resume();
     process.stdin.setEncoding('utf8');
     process.stdin.on('data', function (data) {
-        getSyllables(data.trim().split(/\s+/g));
+        getSyllables(data.trim());
     });
 }
