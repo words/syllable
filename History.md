@@ -1,4 +1,20 @@
 
+n.n.n / 2015-01-12
+==================
+
+  * Update CLI-usage in `Readme.md`
+  * Update CLI with pipe-in detection, other fixes
+  * Add test to CLI to fail without arguments or stdin
+  * Remove `exit 0` on success in `test/cli.sh`
+  * Move `test/index.sh` to `test/cli.sh`
+  * Update copyright notice in `LICENSE` to include 2015
+  * Add link to whole license in `Readme.md`
+  * Add Duo as an instalation method in `Readme.md`
+  * Add links to installation methods in `Readme.md`
+  * Refactor npm scripts for changes in npm
+  * Update jscs-jsdoc
+  * Update eslint
+
 0.1.2 / 2014-12-16
 ==================
 
