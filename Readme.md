@@ -51,7 +51,7 @@ $ npm install --global syllable
 Use:
 
 ```text
-Usage: syllable [options] words...
+Usage: syllable [options] <words...>
 
 Syllable count in an English word
 
@@ -62,11 +62,11 @@ Options:
 
 Usage:
 
-# output syllables for words
+# output syllables
 $ syllable syllable unicorn
 # 6
 
-# output syllables for words from stdin
+# output syllables from stdin
 $ echo "syllable unicorn banana" | syllable
 # 9
 ```
