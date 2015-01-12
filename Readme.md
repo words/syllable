@@ -92,4 +92,4 @@ Based on the syllable functionality found in [**Text-Statistics**](https://githu
 
 ## License
 
-MIT © [Titus Wormer](http://wooorm.com)
+[MIT](LICENSE) © [Titus Wormer](http://wooorm.com)
