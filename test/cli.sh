@@ -17,16 +17,16 @@ function assert {
     fi
 }
 
-it "Should accept a value"
+it "Should accept an argument"
     result=`./cli.js "syllables"` 2> /dev/null
     assert $result "3"
 
-it "Should accept multiple values"
-    result=`./cli.js "syllables unicorns"` 2> /dev/null
-    assert $result "6"
-
 it "Should accept multiple arguments"
     result=`./cli.js "syllables" "unicorns"` 2> /dev/null
+    assert $result "6"
+
+it "Should accept multiple values"
+    result=`./cli.js "syllables unicorns"` 2> /dev/null
     assert $result "6"
 
 it "Should accept a value over stdin"
@@ -36,6 +36,11 @@ it "Should accept a value over stdin"
 it "Should accept multiple values over stdin"
     result=`echo "syllables unicorns" | ./cli.js` 2> /dev/null
     assert $result "6"
+
+it "Should fail when no values are piped in and no values are given"
+    code=0
+    ./cli.js > /dev/null 2>&1 || code=$?
+    assert $code 1
 
 it "Should accept \`--help\`"
     code=0
