@@ -4,24 +4,27 @@ Syllable count in JavaScript.
 
 ## Installation
 
-npm:
+[npm](https://docs.npmjs.com/cli/install):
+
 ```bash
 $ npm install syllable
 ```
 
-Component:
+[Component.js](https://github.com/componentjs/component):
+
 ```bash
 $ component install wooorm/syllable
 ```
 
-Bower:
+[Bower](http://bower.io/#install-packages):
+
 ```bash
 $ bower install syllable
 ```
 
 ## Usage
 
-```js
+```javascript
 var syllable = require('syllable');
 
 syllable("syllable"); // 3
@@ -34,12 +37,14 @@ syllable("mmmmmmmmmmmmmmmm"); // 1
 ## CLI
 
 Install:
+
 ```bash
 $ npm install --global syllable
 ```
 
 Use:
-```
+
+```text
 Usage: syllable [options] words...
 
 Syllable count in an English word
@@ -64,8 +69,7 @@ $ echo "syllable unicorn banana" | syllable
 
 On a MacBook Air, it runs about 57,000 words per second.
 
-
-```
+```text
           syllable — this module
   57 op/s » op/s * 1,000
 
