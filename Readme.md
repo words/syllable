@@ -22,6 +22,12 @@ $ component install wooorm/syllable
 $ bower install syllable
 ```
 
+[Duo](http://duojs.org/#getting-started):
+
+```javascript
+var syllable = require('wooorm/syllable');
+```
+
 ## Usage
 
 ```javascript
