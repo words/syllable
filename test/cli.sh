@@ -58,5 +58,3 @@ it "Should accept \`-v\`"
     assert $code 0
 
 printf "\033[32m\n(✓) Passed $tests assertions without errors\033[0m\n";
-
-exit 0
