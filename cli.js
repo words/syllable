@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
+/* eslint-disable no-process-exit */
+
 /*
  * Dependencies.
  */
