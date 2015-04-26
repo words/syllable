@@ -6,18 +6,16 @@
  * Dependencies.
  */
 
-var syllable;
-
-syllable = require('./');
+var syllable = require('./');
 
 /*
  * Optional dependencies.
  */
 
-var syllablistic,
-    Statistics,
-    statistics,
-    hasException;
+var syllablistic;
+var Statistics;
+var statistics;
+var hasException;
 
 try {
     syllablistic = require('syllablistic');
@@ -49,9 +47,7 @@ if (hasException) {
  *   https://github.com/atebits/Words
  */
 
-var fixtures;
-
-fixtures = [
+var fixtures = [
     'aa',
     'aah',
     'aahed',

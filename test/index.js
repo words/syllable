@@ -6,13 +6,9 @@
  * Dependencies.
  */
 
-var syllable,
-    fixtures,
-    assert;
-
-syllable = require('..');
-fixtures = require('./fixture.json');
-assert = require('assert');
+var syllable = require('..');
+var fixtures = require('./fixture.json');
+var assert = require('assert');
 
 /**
  * The unit tests include in- and output values provided by the original,
@@ -35,9 +31,7 @@ describe('syllable()', function () {
     });
 
     it('should be case insensitive', function () {
-        var result;
-
-        result = syllable('syllables');
+        var result = syllable('syllables');
 
         assert(syllable('SYLLABLES') === result);
         assert(syllable('SyLlABlEs') === result);
@@ -56,9 +50,7 @@ describe('syllable()', function () {
 });
 
 describe('fixtures', function () {
-    var values;
-
-    values = Object.keys(fixtures);
+    var values = Object.keys(fixtures);
 
     it('should work on ' + values.length + ' fixtures', function () {
         values.forEach(function (value) {

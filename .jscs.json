@@ -49,7 +49,7 @@
     "beforeOpeningRoundBrace": true,
     "beforeOpeningCurlyBrace": true
   },
-  "requireMultipleVarDecl": true,
+  "disallowMultipleVarDecl": true,
   "requireBlocksOnNewline": true,
   "disallowPaddingNewlinesInBlocks": true,
   "disallowEmptyBlocks": true,

@@ -7,35 +7,26 @@
  * Dependencies.
  */
 
-var syllable,
-    pack;
-
-syllable = require('./');
-pack = require('./package.json');
+var syllable = require('./');
+var pack = require('./package.json');
 
 /*
  * Detect if a value is expected to be piped in.
  */
 
-var expextPipeIn;
-
-expextPipeIn = !process.stdin.isTTY;
+var expextPipeIn = !process.stdin.isTTY;
 
 /*
  * Arguments.
  */
 
-var argv;
-
-argv = process.argv.slice(2);
+var argv = process.argv.slice(2);
 
 /*
  * Command.
  */
 
-var command;
-
-command = Object.keys(pack.bin)[0];
+var command = Object.keys(pack.bin)[0];
 
 /**
  * Add `a` to `b`.
