@@ -34,6 +34,7 @@
     "component.json",
     "package.json",
     "benchmark.js",
+    "build.js",
     "cli.js"
   ]
 }
