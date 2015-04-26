@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    "comment-config",
+    "github",
+    "toc",
+    "usage"
+  ],
+  "settings": {
+    "bullet": "*"
+  }
+}

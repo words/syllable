@@ -30,14 +30,22 @@ var syllable = require('wooorm/syllable');
 
 ## Usage
 
-```javascript
-var syllable = require('syllable');
+Dependencies:
 
-syllable("syllable"); // 3
-syllable("unicorn"); // 3
-syllable("hi"); // 1
-syllable("hihi"); // 2
-syllable("mmmmmmmmmmmmmmmm"); // 1
+```javascript
+
+var syllable = require('syllable');
+```
+
+Results:
+
+```javascript
+
+syllable('syllable'); // 3
+syllable('unicorn'); // 3
+syllable('hi'); // 1
+syllable('hihi'); // 2
+syllable('mmmmmmmmmmmmmmmm'); // 1
 ```
 
 ## CLI

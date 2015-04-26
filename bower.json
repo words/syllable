@@ -35,6 +35,7 @@
     "package.json",
     "benchmark.js",
     "build.js",
-    "cli.js"
+    "cli.js",
+    "example.js"
   ]
 }

@@ -9,6 +9,7 @@ node_modules/
 test/
 benchmark.js
 build.js
+example.js
 bower.json
 component.json
 History.md
