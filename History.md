@@ -1,5 +1,14 @@
 <!-- mdast setext -->
 
+0.1.4 / 2015-04-26
+==================
+
+*   Add mdast to control markdown ([16b069d](https://github.com/wooorm/syllable/commit/16b069d))
+*   Refactor to disallow multi-variable declarations ([142cf51](https://github.com/wooorm/syllable/commit/142cf51))
+*   Add `build.js` to `.gitignore` ([785ab81](https://github.com/wooorm/syllable/commit/785ab81))
+*   Refactor to simplify lint script targets ([101be2c](https://github.com/wooorm/syllable/commit/101be2c))
+*   Update eslint ([fafb897](https://github.com/wooorm/syllable/commit/fafb897))
+
 0.1.3 / 2015-01-12
 ==================
 
