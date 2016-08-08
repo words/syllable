@@ -1,8 +1,7 @@
 .DS_Store
 *.log
-bower_components/
-build/
-components/
+.nyc_output/
 coverage/
 node_modules/
-build.js
+syllable.js
+syllable.min.js

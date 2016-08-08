@@ -1,13 +1,27 @@
 language: node_js
-script: npm run-script test-travis
 node_js:
-- '0.10'
 - '0.11'
-after_script: npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls
+- '0.12'
+- '4.0'
+- '5.0'
+- '6.0'
+sudo: false
+after_success:
+- bash <(curl -s https://codecov.io/bash)
 deploy:
-  provider: npm
-  email: tituswormer@gmail.com
-  api_key:
-    secure: gfnIxVBfKpsLXRlj3cXvXHyJiXa2CZPFgWEXALIMKJo5LMMS22pYte/4HAYZDQpPAtIW0w1Ke5j5hEL1/NfdFZbiWMnTbT5nBt7gj9WPSKGt4XIK22evuw3gkdsH4AtUrfkd+7VUoo0PN/poVcFdESXipbcmOd2RZZgARySXmFg=
-  on:
-    repo: wooorm/syllable
+  - provider: npm
+    email: tituswormer@gmail.com
+    api_key:
+      secure: t5G1dvlwKKThyktRGGqVrU/5pbDKFfV7wANzNLYihQX6NB/4xdos2pdnnxOWmNqAubglR7yYPIQ1W+btEs053XRhlfmBgcs0UADoMfb3p0p0JfNdcX1PYVgs5FvA54dgtZXTEq6JN+Lu3GWboZnyJ+alUhMtZ+UGbZefIS1fsxs=
+    on:
+      tags: true
+      node: '5.0'
+  - provider: releases
+    api_key:
+      secure: rsgdAJUGN9h57xOpxpI/bBRI23sYWbzMlWCw46FZMV8BZuolSfBciTj1tblcuRL03gwNoDrBeOJOJJ5TlqL671hDIQ1NlRPJ1FomRePWMIWFYz1RKnHd9aYLe+hcNudVF6cfpMVJGDtzhIJIOIXslJJ/+wAYluwlQrwB9SubfoU=
+    file:
+      - "syllable.js"
+      - "syllable.min.js"
+    on:
+      tags: true
+      node: '6.0'

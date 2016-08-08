@@ -1,7 +1,7 @@
 {
   "name": "syllable",
   "version": "0.1.4",
-  "description": "Syllable count in an English word",
+  "description": "Count syllables in English words",
   "license": "MIT",
   "keywords": [
     "detect",
@@ -12,43 +12,81 @@
     "bin"
   ],
   "dependencies": {
-    "pluralize": "^1.0.0"
+    "has": "^1.0.1",
+    "pluralize": "^3.0.0",
+    "trim": "0.0.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wooorm/syllable.git"
+  "repository": "https://github.com/wooorm/syllable",
+  "bugs": "https://github.com/wooorm/syllable/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+  ],
+  "engines": {
+    "node": ">=0.11.0"
   },
-  "author": "Titus Wormer <tituswormer@gmail.com>",
+  "files": [
+    "problematic.json",
+    "index.js",
+    "cli.js"
+  ],
   "bin": {
     "syllable": "cli.js"
   },
   "devDependencies": {
-    "eslint": "^0.20.0",
-    "istanbul": "^0.3.0",
-    "jscs": "^1.0.0",
-    "jscs-jsdoc": "^0.4.0",
-    "matcha": "^0.6.0",
-    "mdast": "^0.19.0",
-    "mdast-comment-config": "^0.1.0",
-    "mdast-github": "^0.2.0",
-    "mdast-toc": "^0.3.0",
-    "mdast-usage": "^0.2.0",
-    "mocha": "^2.0.0"
+    "browserify": "^13.0.0",
+    "esmangle": "^1.0.0",
+    "execa": "^0.4.0",
+    "nyc": "^7.1.0",
+    "remark-cli": "^1.0.0",
+    "remark-comment-config": "^4.0.0",
+    "remark-github": "^5.0.0",
+    "remark-lint": "^4.0.0",
+    "remark-validate-links": "^4.0.0",
+    "tape": "^4.4.0",
+    "xo": "^0.16.0"
   },
   "scripts": {
-    "test-api": "_mocha --check-leaks test/index.js",
-    "test-cli": "bash ./test/cli.sh",
-    "test-coveralls": "istanbul cover _mocha --report lcovonly -- --check-leaks test/index.js",
-    "test-coverage": "istanbul cover _mocha -- --check-leaks test/index.js",
-    "test-travis": "npm run test-coveralls && npm run test-cli",
-    "test": "npm run test-api && npm run test-cli",
-    "lint-api": "eslint {index,cli,benchmark}.js test",
-    "lint-style": "jscs --reporter inline {index,cli,benchmark}.js test",
-    "lint": "npm run lint-api && npm run lint-style",
-    "build-md": "mdast . --output",
-    "make": "npm run lint && npm run test-coverage",
-    "build": "npm run build-md",
-    "install-benchmark": "npm install syllablistic text-statistics",
-    "benchmark": "matcha benchmark.js"
+    "build-md": "remark . --quiet --frail",
+    "build-bundle": "browserify index.js -s syllable > syllable.js",
+    "build-mangle": "esmangle syllable.js > syllable.min.js",
+    "build": "npm run build-md && npm run build-bundle && npm run build-mangle",
+    "lint": "xo",
+    "test-api": "node test",
+    "test-coverage": "nyc --reporter lcov tape test/index.js",
+    "test": "npm run build && npm run lint && npm run test-coverage"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "lines": 100,
+    "functions": 100,
+    "branches": 100
+  },
+  "xo": {
+    "space": true,
+    "rules": {
+      "guard-for-in": "off",
+      "max-lines": "off"
+    },
+    "ignores": [
+      "syllable.js",
+      "syllable.min.js"
+    ]
+  },
+  "remarkConfig": {
+    "output": true,
+    "plugins": {
+      "comment-config": null,
+      "lint": {
+        "heading-increment": false,
+        "no-duplicate-headings": false,
+        "list-item-spacing": false
+      },
+      "github": null,
+      "validate-links": null
+    },
+    "settings": {
+      "bullet": "*"
+    }
   }
 }

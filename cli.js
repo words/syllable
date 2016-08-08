@@ -3,40 +3,54 @@
 
 /* eslint-disable no-process-exit */
 
-/*
- * Dependencies.
- */
-
-var syllable = require('./');
+/* Dependencies. */
+var trim = require('trim');
 var pack = require('./package.json');
+var syllable = require('./');
 
-/*
- * Detect if a value is expected to be piped in.
- */
-
-var expextPipeIn = !process.stdin.isTTY;
-
-/*
- * Arguments.
- */
-
+/* Arguments. */
 var argv = process.argv.slice(2);
 
-/*
- * Command.
- */
-
+/* Command. */
 var command = Object.keys(pack.bin)[0];
 
+/* Program. */
+if (
+  argv.indexOf('--help') !== -1 ||
+  argv.indexOf('-h') !== -1
+) {
+  console.log(help());
+} else if (
+  argv.indexOf('--version') !== -1 ||
+  argv.indexOf('-v') !== -1
+) {
+  console.log(pack.version);
+} else if (argv.length) {
+  getSyllables(argv.join(' '));
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding('utf8');
+  process.stdin.on('data', function (data) {
+    getSyllables(data);
+  });
+}
+
+return;
+
 /**
- * Add `a` to `b`.
+ * Get the syllables in a document.
  *
- * @param {number} a
- * @param {number} b
- * @return {number}
+ * @param {string?} value
  */
-function sum(a, b) {
-    return a + b;
+function getSyllables(value) {
+  value = value.split(/\s+/g).map(trim).filter(Boolean);
+
+  if (value.length) {
+    console.log(syllables(value));
+  } else {
+    process.stderr.write(help());
+    process.exit(1);
+  }
 }
 
 /**
@@ -46,7 +60,7 @@ function sum(a, b) {
  * @return {number}
  */
 function syllables(values) {
-    return values.map(syllable).reduce(sum);
+  return values.map(syllable).reduce(sum);
 }
 
 /**
@@ -55,66 +69,37 @@ function syllables(values) {
  * @return {string}
  */
 function help() {
-    return [
-        '',
-        'Usage: ' + command + ' [options] <words...>',
-        '',
-        pack.description,
-        '',
-        'Options:',
-        '',
-        '  -h, --help           output usage information',
-        '  -v, --version        output version number',
-        '',
-        'Usage:',
-        '',
-        '# output syllables',
-        '$ ' + command + ' syllable unicorn',
-        '# ' + syllables(['syllable', 'unicorn']),
-        '',
-        '# output syllables from stdin',
-        '$ echo "syllable unicorn banana" | ' + command,
-        '# ' + syllables(['syllable', 'unicorn', 'banana']),
-        ''
-    ].join('\n  ') + '\n';
+  return [
+    '',
+    'Usage: ' + command + ' [options] <words...>',
+    '',
+    pack.description,
+    '',
+    'Options:',
+    '',
+    '  -h, --help           output usage information',
+    '  -v, --version        output version number',
+    '',
+    'Usage:',
+    '',
+    '# output syllables',
+    '$ ' + command + ' syllable unicorn',
+    '# ' + syllables(['syllable', 'unicorn']),
+    '',
+    '# output syllables from stdin',
+    '$ echo "syllable unicorn banana" | ' + command,
+    '# ' + syllables(['syllable', 'unicorn', 'banana']),
+    ''
+  ].join('\n  ') + '\n';
 }
 
 /**
- * Get the syllables in a document.
+ * Add `a` to `b`.
  *
- * @param {string?} value
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
  */
-function getSyllables(value) {
-    if (value) {
-        console.log(syllables(value.split(/\s+/g)));
-    } else {
-        process.stderr.write(help());
-        process.exit(1);
-    }
-}
-
-/*
- * Program.
- */
-
-if (
-    argv.indexOf('--help') !== -1 ||
-    argv.indexOf('-h') !== -1
-) {
-    console.log(help());
-} else if (
-    argv.indexOf('--version') !== -1 ||
-    argv.indexOf('-v') !== -1
-) {
-    console.log(pack.version);
-} else if (argv.length) {
-    getSyllables(argv.join(' '));
-} else if (!expextPipeIn) {
-    getSyllables();
-} else {
-    process.stdin.resume();
-    process.stdin.setEncoding('utf8');
-    process.stdin.on('data', function (data) {
-        getSyllables(data.trim());
-    });
+function sum(a, b) {
+  return a + b;
 }
