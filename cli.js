@@ -35,8 +35,6 @@ if (
   });
 }
 
-return;
-
 /**
  * Get the syllables in a document.
  *
