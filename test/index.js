@@ -54,7 +54,7 @@ test('cli', function (t) {
   execa('./cli.js', ['  ']).then(function () {}, function (err) {
     t.equal(err.code, 1, 'should exit with `1` without input');
     t.ok(
-      /\s*Usage: syllable \[options\] <words...>/.test(err.stderr),
+      /\s*Usage: syllable \[options] <words...>/.test(err.stderr),
       'Should emit the help message'
     );
   });
@@ -62,7 +62,7 @@ test('cli', function (t) {
   ['-h', '--help'].forEach(function (flag) {
     execa('./cli.js', [flag]).then(function (result) {
       t.ok(
-        /\s*Usage: syllable \[options\] <words...>/.test(result.stdout),
+        /\s*Usage: syllable \[options] <words...>/.test(result.stdout),
         'Should accept `' + flag + '`'
       );
     }, t.ifErr);
