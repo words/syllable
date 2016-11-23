@@ -11,27 +11,22 @@
     "cli",
     "bin"
   ],
-  "dependencies": {
-    "has": "^1.0.1",
-    "pluralize": "^3.0.0",
-    "trim": "0.0.1"
-  },
   "repository": "https://github.com/wooorm/syllable",
   "bugs": "https://github.com/wooorm/syllable/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
   ],
-  "engines": {
-    "node": ">=0.11.0"
-  },
   "files": [
     "problematic.json",
     "index.js",
     "cli.js"
   ],
-  "bin": {
-    "syllable": "cli.js"
+  "bin": "cli.js",
+  "dependencies": {
+    "has": "^1.0.1",
+    "pluralize": "^3.0.0",
+    "trim": "0.0.1"
   },
   "devDependencies": {
     "browserify": "^13.0.0",
@@ -63,8 +58,7 @@
     "space": true,
     "rules": {
       "unicorn/explicit-length-check": "off",
-      "guard-for-in": "off",
-      "max-lines": "off"
+      "guard-for-in": "off"
     },
     "ignores": [
       "syllable.js"
