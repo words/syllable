@@ -12,7 +12,7 @@ var syllable = require('./');
 var argv = process.argv.slice(2);
 
 /* Command. */
-var command = Object.keys(pack.bin)[0];
+var command = pack.name;
 
 /* Program. */
 if (
