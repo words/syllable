@@ -1,14 +1,5 @@
-/**
- * @author Titus Wormer
- * @copyright 2015 Titus Wormer
- * @license MIT
- * @module syllable
- * @fileoverview Test suite for `syllable`.
- */
-
 'use strict';
 
-/* Dependencies. */
 var Stream = require('stream').PassThrough;
 var test = require('tape');
 var execa = require('execa');
@@ -16,7 +7,6 @@ var fixtures = require('./fixture.json');
 var pack = require('../package.json');
 var syllable = require('..');
 
-/* Tests. */
 test('api', function (t) {
   var result = syllable('syllables');
 
@@ -33,7 +23,6 @@ test('api', function (t) {
   t.end();
 });
 
-/* CLI. */
 test('cli', function (t) {
   var stream;
 
@@ -95,12 +84,6 @@ test('cli', function (t) {
       });
     });
   });
-
-  // execa('./cli.js').then(function () {
-  //   console.log('res: ', err);
-  // }, function (err) {
-  //   console.log('err: ', err);
-  // });
 });
 
 /* Fixtures.

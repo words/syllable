@@ -35,11 +35,7 @@ if (
   });
 }
 
-/**
- * Get the syllables in a document.
- *
- * @param {string?} value
- */
+/* Get the syllables in a document. */
 function getSyllables(value) {
   value = value.split(/\s+/g).map(trim).filter(Boolean);
 
@@ -51,21 +47,12 @@ function getSyllables(value) {
   }
 }
 
-/**
- * Get the syllables for multiple words.
- *
- * @param {Array.<string>} values
- * @return {number}
- */
+/* Get the syllables for multiple words. */
 function syllables(values) {
   return values.map(syllable).reduce(sum);
 }
 
-/**
- * Help.
- *
- * @return {string}
- */
+/* Help. */
 function help() {
   return [
     '',
@@ -91,13 +78,7 @@ function help() {
   ].join('\n  ') + '\n';
 }
 
-/**
- * Add `a` to `b`.
- *
- * @param {number} a
- * @param {number} b
- * @return {number}
- */
+/* Add `a` to `b`. */
 function sum(a, b) {
   return a + b;
 }

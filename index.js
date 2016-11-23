@@ -1,11 +1,3 @@
-/**
- * @author Titus Wormer
- * @copyright 2014 Titus Wormer
- * @license MIT
- * @module syllable
- * @fileoverview Count syllables in English words.
- */
-
 'use strict';
 
 /* Dependencies. */
@@ -306,12 +298,7 @@ var EXPRESSION_TRIPLE = /(ology|ologist|onomy|onomist)$/g;
  * a given value. */
 var EXPRESSION_NONALPHABETIC = /[^a-z]/g;
 
-/**
- * Get syllables in a given value.
- *
- * @param {string} value
- * @return {number}
- */
+/* Get syllables in a given value. */
 function syllable(value) {
   var count = 0;
   var index;
@@ -346,40 +333,6 @@ function syllable(value) {
 
   if (has(problematic, singular)) {
     return problematic[singular];
-  }
-
- /**
-  * Define scoped counters, to be used
-  * in `String#replace()` calls.
-  *
-  * The scoped counter removes the matched value
-  * from the input.
-  *
-  * @param {number} addition
-  * @return {function(): string}
-  */
-  function countFactory(addition) {
-    return function () {
-      count += addition;
-      return '';
-    };
-  }
-
- /**
-  * Define scoped counters, to be used
-  * in `String#replace()` calls.
-  *
-  * The scoped counter does not remove the matched
-  * value from the input.
-  *
-  * @param {number} addition
-  * @return {function(): string}
-  */
-  function returnFactory(addition) {
-    return function ($0) {
-      count += addition;
-      return $0;
-    };
   }
 
   addOne = returnFactory(1);
@@ -419,4 +372,28 @@ function syllable(value) {
 
   /* Make sure at least on is returned. */
   return count || 1;
+
+ /* Define scoped counters, to be used
+  * in `String#replace()` calls.
+  * The scoped counter removes the matched value
+  * from the input. */
+  function countFactory(addition) {
+    return counter;
+    function counter() {
+      count += addition;
+      return '';
+    }
+  }
+
+ /* Define scoped counters, to be used
+  * in `String#replace()` calls.
+  * The scoped counter does not remove the matched
+  * value from the input. */
+  function returnFactory(addition) {
+    return returner;
+    function returner($0) {
+      count += addition;
+      return $0;
+    }
+  }
 }
