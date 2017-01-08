@@ -20,6 +20,13 @@ test('api', function (t) {
   t.equal(syllable('mmmm'), 1, 'should work (3)');
   t.equal(syllable('am'), 1, 'should work (4)');
 
+  t.equal(syllable('wine'), 1, 'should support multiple word-parts (1)');
+  t.equal(syllable('bottle'), 2, 'should support multiple word-parts (2)');
+  t.equal(syllable('wine-bottle'), 3, 'should support multiple word-parts (3)');
+
+  t.equal(syllable('Zoe'), syllable('Zoë'), 'should support non-ascii characters (1)');
+  t.equal(syllable('Åland'), syllable('Aland'), 'should support non-ascii characters (2)');
+
   t.end();
 });
 

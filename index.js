@@ -3,10 +3,11 @@
 /* Dependencies. */
 var has = require('has');
 var pluralize = require('pluralize');
+var normalize = require('normalize-strings');
 var problematic = require('./problematic');
 
 /* Expose. */
-module.exports = syllable;
+module.exports = syllables;
 
 /* Two expressions of occurrences which normally would
  * be counted as two syllables, but should be counted
@@ -294,9 +295,26 @@ var EXPRESSION_DOUBLE = new RegExp(
 /* Expression to match triple syllable suffixes. */
 var EXPRESSION_TRIPLE = /(ology|ologist|onomy|onomist)$/g;
 
+/* Expression to split on word boundaries. */
+var SPLIT = /\b/g;
+
 /* Expression to remove non-alphabetic characters from
  * a given value. */
 var EXPRESSION_NONALPHABETIC = /[^a-z]/g;
+
+/* Wrapper to support multiple word-parts (GH-11). */
+function syllables(value) {
+  var values = normalize(String(value)).toLowerCase().split(SPLIT);
+  var length = values.length;
+  var index = -1;
+  var total = 0;
+
+  while (++index < length) {
+    total += syllable(values[index].replace(EXPRESSION_NONALPHABETIC, ''));
+  }
+
+  return total;
+}
 
 /* Get syllables in a given value. */
 function syllable(value) {
@@ -307,10 +325,6 @@ function syllable(value) {
   var parts;
   var addOne;
   var subtractOne;
-
-  value = String(value)
-    .toLowerCase()
-    .replace(EXPRESSION_NONALPHABETIC, '');
 
   if (!value.length) {
     return count;
