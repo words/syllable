@@ -62,6 +62,8 @@ $ echo "syllable unicorn banana" | syllable
 Based on the syllable functionality found in [**Text-Statistics**][stats]
 (PHP), in turn inspired by [**Lingua-EN-Syllable**][lingua] (Perl).
 
+Support for word-breaks and non-ASCII characters added later.
+
 ## License
 
 [MIT][license] © [Titus Wormer][author]
