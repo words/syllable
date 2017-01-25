@@ -30,7 +30,7 @@
     "trim": "0.0.1"
   },
   "devDependencies": {
-    "browserify": "^13.0.0",
+    "browserify": "^14.0.0",
     "esmangle": "^1.0.0",
     "execa": "^0.6.0",
     "nyc": "^10.0.0",
