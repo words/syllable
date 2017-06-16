@@ -24,7 +24,6 @@
   ],
   "bin": "cli.js",
   "dependencies": {
-    "has": "^1.0.1",
     "normalize-strings": "^1.1.0",
     "pluralize": "^4.0.0",
     "trim": "0.0.1"

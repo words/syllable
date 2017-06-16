@@ -1,13 +1,14 @@
 'use strict';
 
 /* Dependencies. */
-var has = require('has');
 var pluralize = require('pluralize');
 var normalize = require('normalize-strings');
 var problematic = require('./problematic');
 
 /* Expose. */
 module.exports = syllables;
+
+var own = {}.hasOwnProperty;
 
 /* Two expressions of occurrences which normally would
  * be counted as two syllables, but should be counted
@@ -337,7 +338,7 @@ function syllable(value) {
 
   /* If `value` is a hard to count, it might be
    * in `problematic`. */
-  if (has(problematic, value)) {
+  if (own.call(problematic, value)) {
     return problematic[value];
   }
 
@@ -345,7 +346,7 @@ function syllable(value) {
    * in `problematic`. */
   singular = pluralize(value, 1);
 
-  if (has(problematic, singular)) {
+  if (own.call(problematic, singular)) {
     return problematic[singular];
   }
 
