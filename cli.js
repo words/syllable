@@ -21,24 +21,24 @@ if (
   argv.indexOf('-v') !== -1
 ) {
   console.log(pack.version);
-} else if (argv.length) {
-  getSyllables(argv.join(' '));
-} else {
+} else if (argv.length === 0) {
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', function (data) {
     getSyllables(data);
   });
+} else {
+  getSyllables(argv.join(' '));
 }
 
 function getSyllables(value) {
   value = value.split(/\s+/g).map(trim).filter(Boolean);
 
-  if (value.length) {
-    console.log(syllables(value));
-  } else {
+  if (value.length === 0) {
     process.stderr.write(help());
     process.exit(1);
+  } else {
+    console.log(syllables(value));
   }
 }
 

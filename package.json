@@ -58,7 +58,6 @@
     "space": true,
     "esnext": false,
     "rules": {
-      "unicorn/explicit-length-check": "off",
       "guard-for-in": "off"
     },
     "ignores": [

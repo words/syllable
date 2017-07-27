@@ -325,7 +325,7 @@ function syllable(value) {
   var addOne;
   var subtractOne;
 
-  if (!value.length) {
+  if (value.length === 0) {
     return count;
   }
 
