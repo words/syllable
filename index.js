@@ -2,7 +2,7 @@
 
 var pluralize = require('pluralize');
 var normalize = require('normalize-strings');
-var problematic = require('./problematic');
+var problematic = require('./problematic.json');
 
 module.exports = syllables;
 
