@@ -3,18 +3,14 @@
 
 /* eslint-disable no-process-exit */
 
-/* Dependencies. */
 var trim = require('trim');
 var pack = require('./package.json');
 var syllable = require('./');
 
-/* Arguments. */
 var argv = process.argv.slice(2);
 
-/* Command. */
 var command = pack.name;
 
-/* Program. */
 if (
   argv.indexOf('--help') !== -1 ||
   argv.indexOf('-h') !== -1
@@ -35,7 +31,6 @@ if (
   });
 }
 
-/* Get the syllables in a document. */
 function getSyllables(value) {
   value = value.split(/\s+/g).map(trim).filter(Boolean);
 
@@ -47,12 +42,10 @@ function getSyllables(value) {
   }
 }
 
-/* Get the syllables for multiple words. */
 function syllables(values) {
   return values.map(syllable).reduce(sum);
 }
 
-/* Help. */
 function help() {
   return [
     '',

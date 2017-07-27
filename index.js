@@ -1,11 +1,9 @@
 'use strict';
 
-/* Dependencies. */
 var pluralize = require('pluralize');
 var normalize = require('normalize-strings');
 var problematic = require('./problematic');
 
-/* Expose. */
 module.exports = syllables;
 
 var own = {}.hasOwnProperty;
