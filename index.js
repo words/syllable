@@ -59,6 +59,7 @@ var EXPRESSION_MONOSYLLABIC_ONE = new RegExp(
       'rv|' +
       's|' +
       'sc|' +
+      'sh|' +
       'sk|' +
       'sl|' +
       'squ|' +
@@ -184,7 +185,7 @@ var EXPRESSION_DOUBLE_SYLLABIC_ONE = new RegExp(
     'oa|' +
     'ua|' +
     'eings?|' +
-    '[aeiouy]sh?e[drs](?!\b)' +
+    '[aeiouy]sh?e[rs]' +
   ')$',
   'g'
 );
@@ -360,13 +361,13 @@ function syllable(value) {
 
   /* Count some prefixes and suffixes, and remove
    * their matched ranges. */
-  value = value
+  var croppedValue = value
     .replace(EXPRESSION_TRIPLE, countFactory(3))
     .replace(EXPRESSION_DOUBLE, countFactory(2))
     .replace(EXPRESSION_SINGLE, countFactory(1));
 
   /* Count multiple consonants. */
-  parts = value.split(/[^aeiouy]+/);
+  parts = croppedValue.split(/[^aeiouy]+/);
   index = -1;
   length = parts.length;
 
