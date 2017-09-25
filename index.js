@@ -11,204 +11,132 @@ var own = {}.hasOwnProperty
 // Two expressions of occurrences which normally would be counted as two
 // syllables, but should be counted as one.
 var EXPRESSION_MONOSYLLABIC_ONE = new RegExp(
-  'cia(l|$)|' +
-    'tia|' +
-    'cius|' +
-    'cious|' +
-    '[^aeiou]giu|' +
-    '[aeiouy][^aeiouy]ion|' +
-    'iou|' +
-    'sia$|' +
-    'eous$|' +
-    '[oa]gue$|' +
-    '.[^aeiuoycgltdb]{2,}ed$|' +
-    '.ely$|' +
-    '^jua|' +
-    'uai|' +
-    'eau|' +
-    '^busi$|' +
-    '(' +
-    '[aeiouy]' +
-    '(' +
-    'b|' +
-    'c|' +
-    'ch|' +
-    'dg|' +
-    'f|' +
-    'g|' +
-    'gh|' +
-    'gn|' +
-    'k|' +
-    'l|' +
-    'lch|' +
-    'll|' +
-    'lv|' +
-    'm|' +
-    'mm|' +
-    'n|' +
-    'nc|' +
-    'ng|' +
-    'nch|' +
-    'nn|' +
-    'p|' +
-    'r|' +
-    'rc|' +
-    'rn|' +
-    'rs|' +
-    'rv|' +
-    's|' +
-    'sc|' +
-    'sk|' +
-    'sl|' +
-    'squ|' +
-    'ss|' +
-    'th|' +
-    'v|' +
-    'y|' +
-    'z' +
-    ')' +
-    'ed$' +
-    ')|' +
-    '(' +
-    '[aeiouy]' +
-    '(' +
-    'b|' +
-    'ch|' +
-    'd|' +
-    'f|' +
-    'gh|' +
-    'gn|' +
-    'k|' +
-    'l|' +
-    'lch|' +
-    'll|' +
-    'lv|' +
-    'm|' +
-    'mm|' +
-    'n|' +
-    'nch|' +
-    'nn|' +
-    'p|' +
-    'r|' +
-    'rn|' +
-    'rs|' +
-    'rv|' +
-    's|' +
-    'sc|' +
-    'sk|' +
-    'sl|' +
-    'squ|' +
-    'ss|' +
-    'st|' +
-    't|' +
-    'th|' +
-    'v|' +
-    'y' +
-    ')' +
-    'es$' +
-    ')',
+  [
+    'cia(?:l|$)',
+    'tia',
+    'cius',
+    'cious',
+    '[^aeiou]giu',
+    '[aeiouy][^aeiouy]ion',
+    'iou',
+    'sia$',
+    'eous$',
+    '[oa]gue$',
+    '.[^aeiuoycgltdb]{2,}ed$',
+    '.ely$',
+    '^jua',
+    'uai',
+    'eau',
+    '^busi$',
+    '(?:[aeiouy](?:' +
+      [
+        '[bcfgklmnprsvwxyz]',
+        'ch',
+        'dg',
+        'g[hn]',
+        'lch',
+        'l[lv]',
+        'mm',
+        'nch',
+        'n[cgn]',
+        'r[bcnsv]',
+        'squ',
+        's[chkls]',
+        'th'
+      ].join('|') +
+      ')ed$)',
+    '(?:[aeiouy](?:' +
+      [
+        '[bdfklmnprstvy]',
+        'ch',
+        'g[hn]',
+        'lch',
+        'l[lv]',
+        'mm',
+        'nch',
+        'nn',
+        'r[nsv]',
+        'squ',
+        's[cklst]',
+        'th'
+      ].join('|') +
+      ')es$)'
+  ].join('|'),
   'g'
 )
 
 var EXPRESSION_MONOSYLLABIC_TWO = new RegExp(
-  '[aeiouy]' +
-    '(' +
-    'b|' +
-    'c|' +
-    'ch|' +
-    'd|' +
-    'dg|' +
-    'f|' +
-    'g|' +
-    'gh|' +
-    'gn|' +
-    'k|' +
-    'l|' +
-    'll|' +
-    'lv|' +
-    'm|' +
-    'mm|' +
-    'n|' +
-    'nc|' +
-    'ng|' +
-    'nn|' +
-    'p|' +
-    'r|' +
-    'rc|' +
-    'rn|' +
-    'rs|' +
-    'rv|' +
-    's|' +
-    'sc|' +
-    'sk|' +
-    'sl|' +
-    'squ|' +
-    'ss|' +
-    'st|' +
-    't|' +
-    'th|' +
-    'v|' +
-    'y|' +
-    'z' +
-    ')' +
-    'e$',
+  '[aeiouy](?:' +
+    [
+      '[bcdfgklmnprstvyz]',
+      'ch',
+      'dg',
+      'g[hn]',
+      'l[lv]',
+      'mm',
+      'n[cgn]',
+      'r[cnsv]',
+      'squ',
+      's[cklst]',
+      'th'
+    ].join('|') +
+    ')e$',
   'g'
 )
 
 // Four expression of occurrences which normally would be counted as one
 // syllable, but should be counted as two.
 var EXPRESSION_DOUBLE_SYLLABIC_ONE = new RegExp(
-  '(' +
-    '(' +
-    '[^aeiouy]' +
-    ')\\2l|' +
-    '[^aeiouy]ie' +
-    '(' +
-    'r|' +
-    'st|' +
-    't' +
-    ')|' +
-    '[aeiouym]bl|' +
-    'eo|' +
-    'ism|' +
-    'asm|' +
-    'thm|' +
-    'dnt|' +
-    'uity|' +
-    'dea|' +
-    'gean|' +
-    'oa|' +
-    'ua|' +
-    'eings?|' +
-    '[aeiouy]sh?e[rsd]' +
+  '(?:' +
+    [
+      '([^aeiouy])\\1l',
+      '[^aeiouy]ie(?:r|s?t)',
+      '[aeiouym]bl',
+      'eo',
+      'ism',
+      'asm',
+      'thm',
+      'dnt',
+      'snt',
+      'uity',
+      'dea',
+      'gean',
+      'oa',
+      'ua',
+      'react?',
+      'orbed', // Cancel `'.[^aeiuoycgltdb]{2,}ed$',`
+      'eings?',
+      '[aeiouy]sh?e[rs]'
+    ].join('|') +
     ')$',
   'g'
 )
 
 var EXPRESSION_DOUBLE_SYLLABIC_TWO = new RegExp(
-  '[^gq]ua[^auieo]|' +
-    '[aeiou]{3}|' +
-    '^(' +
-    'ia|' +
-    'mc|' +
-    'coa[dglx].' +
-    ')',
+  [
+    '[^gq]ua[^auieo]',
+    '[aeiou]{3}',
+    '^(?:ia|mc|coa[dglx].)',
+    '^re(app|es|im|us)'
+  ].join('|'),
   'g'
 )
 
 var EXPRESSION_DOUBLE_SYLLABIC_THREE = new RegExp(
-  '[^aeiou]y[ae]|' +
-    '[^l]lien|' +
-    'riet|' +
-    'dien|' +
-    'iu|' +
-    'io|' +
-    'ii|' +
-    'uen|' +
-    'real|' +
-    'iell|' +
-    'eo[^aeiou]|' +
-    '[aeiou]y[aeiou]',
+  [
+    '[^aeiou]y[ae]',
+    '[^l]lien',
+    'riet',
+    'dien',
+    'iu',
+    'io',
+    'ii',
+    'uen',
+    'real',
+    'iell',
+    'eo[^aeiou]',
+    '[aeiou]y[aeiou]'
+  ].join('|'),
   'g'
 )
 
@@ -216,77 +144,77 @@ var EXPRESSION_DOUBLE_SYLLABIC_FOUR = /[^s]ia/
 
 // Expression to match single syllable pre- and suffixes.
 var EXPRESSION_SINGLE = new RegExp(
-  '^' +
-    '(' +
-    'un|' +
-    'fore|' +
-    'ware|' +
-    'none?|' +
-    'out|' +
-    'post|' +
-    'sub|' +
-    'pre|' +
-    'pro|' +
-    'dis|' +
-    'side' +
-    ')' +
-    '|' +
-    '(' +
-    'ly|' +
-    'less|' +
-    'some|' +
-    'ful|' +
-    'ers?|' +
-    'ness|' +
-    'cians?|' +
-    'ments?|' +
-    'ettes?|' +
-    'villes?|' +
-    'ships?|' +
-    'sides?|' +
-    'ports?|' +
-    'shires?|' +
-    'tion(ed)?' +
-    ')' +
-    '$',
+  [
+    '^(?:' +
+      [
+        'un',
+        'fore',
+        'ware',
+        'none?',
+        'out',
+        'post',
+        'sub',
+        'pre',
+        'pro',
+        'dis',
+        'side'
+      ].join('|') +
+      ')',
+    '(?:' +
+      [
+        'ly',
+        'less',
+        'some',
+        'ful',
+        'ers?',
+        'ness',
+        'cians?',
+        'ments?',
+        'ettes?',
+        'villes?',
+        'ships?',
+        'sides?',
+        'ports?',
+        'shires?',
+        'tion(?:ed|s)?'
+      ].join('|') +
+      ')$'
+  ].join('|'),
   'g'
 )
 
 // Expression to match double syllable pre- and suffixes.
 var EXPRESSION_DOUBLE = new RegExp(
-  '^' +
-    '(' +
-    'above|' +
-    'anti|' +
-    'ante|' +
-    'counter|' +
-    'hyper|' +
-    'afore|' +
-    'agri|' +
-    'infra|' +
-    'intra|' +
-    'inter|' +
-    'over|' +
-    'semi|' +
-    'ultra|' +
-    'under|' +
-    'extra|' +
-    'dia|' +
-    'micro|' +
-    'mega|' +
-    'kilo|' +
-    'pico|' +
-    'nano|' +
-    'macro' +
-    ')' +
-    '|' +
-    '(' +
-    'fully|' +
-    'berry|' +
-    'woman|' +
-    'women' +
-    ')' +
-    '$',
+  [
+    '^' +
+      '(?:' +
+      [
+        'above',
+        'anti',
+        'ante',
+        'counter',
+        'hyper',
+        'afore',
+        'agri',
+        'infra',
+        'intra',
+        'inter',
+        'over',
+        'semi',
+        'ultra',
+        'under',
+        'extra',
+        'dia',
+        'micro',
+        'mega',
+        'kilo',
+        'pico',
+        'nano',
+        'macro'
+      ].join('|') +
+      ')',
+    '(?:' + ['fully', 'berry', 'woman', 'women', 'edly'].join('|') + ')$'
+  ].join('|'),
   'g'
 )
 
@@ -296,6 +224,9 @@ var EXPRESSION_TRIPLE = /(ology|ologist|onomy|onomist)$/g
 // Expression to split on word boundaries.
 var SPLIT = /\b/g
 
+// Expression to merge elision.
+var APOSTROPHE = /['’]/g
+
 // Expression to remove non-alphabetic characters from a given value.
 var EXPRESSION_NONALPHABETIC = /[^a-z]/g
 
@@ -303,6 +234,7 @@ var EXPRESSION_NONALPHABETIC = /[^a-z]/g
 function syllables(value) {
   var values = normalize(String(value))
     .toLowerCase()
+    .replace(APOSTROPHE, '')
     .split(SPLIT)
   var length = values.length
   var index = -1

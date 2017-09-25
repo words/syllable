@@ -117,9 +117,17 @@ test('cli', function(t) {
 // provides both optional and required tests).
 test('fixtures', function(t) {
   var key
+  var expected
+  var overwrite = {
+    // GH-22: <https://github.com/words/syllable/issues/22>,
+    // Barbed is one syllable as well:
+    // <https://www.howmanysyllables.com/words/barbed>
+    arbed: 1
+  }
 
   for (key in fixtures) {
-    t.equal(syllable(key), fixtures[key], key)
+    expected = (key in overwrite ? overwrite : fixtures)[key]
+    t.equal(syllable(key), expected, key)
   }
 
   t.end()
