@@ -177,13 +177,14 @@ var EXPRESSION_DOUBLE_SYLLABIC_ONE = new RegExp(
     'asm|' +
     'thm|' +
     'dnt|' +
+    'snt|' +
     'uity|' +
     'dea|' +
     'gean|' +
     'oa|' +
     'ua|' +
     'eings?|' +
-    '[aeiouy]sh?e[rs]' +
+    '[aeiouy]sh?e[drs](?!\b)' +
   ')$',
   'g'
 );
