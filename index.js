@@ -65,6 +65,8 @@ var EXPRESSION_MONOSYLLABIC_ONE = new RegExp(
       'ss|' +
       'th|' +
       'v|' +
+      'w|' +
+      'x|' +
       'y|' +
       'z' +
     ')' +
@@ -181,7 +183,7 @@ var EXPRESSION_DOUBLE_SYLLABIC_ONE = new RegExp(
     'oa|' +
     'ua|' +
     'eings?|' +
-    '[aeiouy]sh?e[rsd]' +
+    '[aeiouy]sh?e[rs]' +
   ')$',
   'g'
 );
@@ -297,13 +299,17 @@ var EXPRESSION_TRIPLE = /(ology|ologist|onomy|onomist)$/g;
 /* Expression to split on word boundaries. */
 var SPLIT = /\b/g;
 
+/* Expression to merge contractions */
+var APOSTROPHE = /['’]/g;
+
 /* Expression to remove non-alphabetic characters from
  * a given value. */
 var EXPRESSION_NONALPHABETIC = /[^a-z]/g;
 
 /* Wrapper to support multiple word-parts (GH-11). */
 function syllables(value) {
-  var values = normalize(String(value)).toLowerCase().split(SPLIT);
+  var values = normalize(String(value)).toLowerCase()
+    .replace(APOSTROPHE, '').split(SPLIT);
   var length = values.length;
   var index = -1;
   var total = 0;
