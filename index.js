@@ -252,7 +252,7 @@ var EXPRESSION_SINGLE = new RegExp(
     'sides?|' +
     'ports?|' +
     'shires?|' +
-    'tion(ed)?' +
+    'tion(ed|s)?' +
   ')' +
   '$',
   'g'
