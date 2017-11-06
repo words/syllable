@@ -53,18 +53,22 @@ var EXPRESSION_MONOSYLLABIC_ONE = new RegExp(
       'nn|' +
       'p|' +
       'r|' +
+      'rb|' +
       'rc|' +
       'rn|' +
       'rs|' +
       'rv|' +
       's|' +
       'sc|' +
+      'sh|' +
       'sk|' +
       'sl|' +
       'squ|' +
       'ss|' +
       'th|' +
       'v|' +
+      'w|' +
+      'x|' +
       'y|' +
       'z' +
     ')' +
@@ -175,13 +179,14 @@ var EXPRESSION_DOUBLE_SYLLABIC_ONE = new RegExp(
     'asm|' +
     'thm|' +
     'dnt|' +
+    'snt|' +
     'uity|' +
     'dea|' +
     'gean|' +
     'oa|' +
     'ua|' +
     'eings?|' +
-    '[aeiouy]sh?e[rsd]' +
+    '[aeiouy]sh?e[rs]' +
   ')$',
   'g'
 );
@@ -247,7 +252,7 @@ var EXPRESSION_SINGLE = new RegExp(
     'sides?|' +
     'ports?|' +
     'shires?|' +
-    'tion(ed)?' +
+    'tion(ed|s)?' +
   ')' +
   '$',
   'g'
@@ -285,7 +290,8 @@ var EXPRESSION_DOUBLE = new RegExp(
     'fully|' +
     'berry|' +
     'woman|' +
-    'women' +
+    'women|' +
+    'edly' +
   ')' +
   '$',
   'g'
@@ -297,13 +303,17 @@ var EXPRESSION_TRIPLE = /(ology|ologist|onomy|onomist)$/g;
 /* Expression to split on word boundaries. */
 var SPLIT = /\b/g;
 
+/* Expression to merge contractions */
+var APOSTROPHE = /['’]/g;
+
 /* Expression to remove non-alphabetic characters from
  * a given value. */
 var EXPRESSION_NONALPHABETIC = /[^a-z]/g;
 
 /* Wrapper to support multiple word-parts (GH-11). */
 function syllables(value) {
-  var values = normalize(String(value)).toLowerCase().split(SPLIT);
+  var values = normalize(String(value)).toLowerCase()
+    .replace(APOSTROPHE, '').split(SPLIT);
   var length = values.length;
   var index = -1;
   var total = 0;
