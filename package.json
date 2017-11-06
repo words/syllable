@@ -11,8 +11,9 @@
     "cli",
     "bin"
   ],
-  "repository": "https://github.com/wooorm/syllable",
-  "bugs": "https://github.com/wooorm/syllable/issues",
+  "homepage": "https://words.github.io/syllable/",
+  "repository": "https://github.com/words/syllable",
+  "bugs": "https://github.com/words/syllable/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"

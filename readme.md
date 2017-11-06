@@ -70,13 +70,13 @@ Support for word-breaks and non-ASCII characters added later.
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/wooorm/syllable.svg
+[travis-badge]: https://img.shields.io/travis/words/syllable.svg
 
-[travis]: https://travis-ci.org/wooorm/syllable
+[travis]: https://travis-ci.org/words/syllable
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/syllable.svg
+[codecov-badge]: https://img.shields.io/codecov/c/github/words/syllable.svg
 
-[codecov]: https://codecov.io/github/wooorm/syllable
+[codecov]: https://codecov.io/github/words/syllable
 
 [npm]: https://docs.npmjs.com/cli/install
 
