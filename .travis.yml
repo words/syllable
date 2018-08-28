@@ -5,20 +5,13 @@ node_js:
 sudo: false
 after_script: bash <(curl -s https://codecov.io/bash)
 deploy:
-  - provider: npm
-    email: tituswormer@gmail.com
-    api_key:
-      secure: t5G1dvlwKKThyktRGGqVrU/5pbDKFfV7wANzNLYihQX6NB/4xdos2pdnnxOWmNqAubglR7yYPIQ1W+btEs053XRhlfmBgcs0UADoMfb3p0p0JfNdcX1PYVgs5FvA54dgtZXTEq6JN+Lu3GWboZnyJ+alUhMtZ+UGbZefIS1fsxs=
-    on:
-      tags: true
-      node: '4.0'
-  - provider: releases
-    skip_cleanup: true
-    api_key:
-      secure: rsgdAJUGN9h57xOpxpI/bBRI23sYWbzMlWCw46FZMV8BZuolSfBciTj1tblcuRL03gwNoDrBeOJOJJ5TlqL671hDIQ1NlRPJ1FomRePWMIWFYz1RKnHd9aYLe+hcNudVF6cfpMVJGDtzhIJIOIXslJJ/+wAYluwlQrwB9SubfoU=
-    file:
-      - "syllable.js"
-      - "syllable.min.js"
-    on:
-      tags: true
-      node: '9.0'
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: rsgdAJUGN9h57xOpxpI/bBRI23sYWbzMlWCw46FZMV8BZuolSfBciTj1tblcuRL03gwNoDrBeOJOJJ5TlqL671hDIQ1NlRPJ1FomRePWMIWFYz1RKnHd9aYLe+hcNudVF6cfpMVJGDtzhIJIOIXslJJ/+wAYluwlQrwB9SubfoU=
+  file:
+    - "syllable.js"
+    - "syllable.min.js"
+  on:
+    tags: true
+    node: '9.0'
