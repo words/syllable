@@ -5,3 +5,4 @@ coverage/
 node_modules/
 syllable.js
 syllable.min.js
+yarn.lock
