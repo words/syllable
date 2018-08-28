@@ -5,7 +5,7 @@
 
 var trim = require('trim');
 var pack = require('./package.json');
-var syllable = require('./');
+var syllable = require('.');
 
 var argv = process.argv.slice(2);
 

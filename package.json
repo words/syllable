@@ -30,14 +30,14 @@
     "trim": "0.0.1"
   },
   "devDependencies": {
-    "browserify": "^14.0.0",
+    "browserify": "^16.0.0",
     "esmangle": "^1.0.0",
-    "execa": "^0.8.0",
-    "nyc": "^11.0.0",
-    "remark-cli": "^4.0.0",
-    "remark-preset-wooorm": "^3.0.0",
+    "execa": "^1.0.0",
+    "nyc": "^13.0.0",
+    "remark-cli": "^5.0.0",
+    "remark-preset-wooorm": "^4.0.0",
     "tape": "^4.4.0",
-    "xo": "^0.18.0"
+    "xo": "^0.22.0"
   },
   "scripts": {
     "build-md": "remark . -qfo",

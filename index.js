@@ -386,10 +386,10 @@ function syllable(value) {
   /* Make sure at least on is returned. */
   return count || 1;
 
- /* Define scoped counters, to be used
-  * in `String#replace()` calls.
-  * The scoped counter removes the matched value
-  * from the input. */
+  /* Define scoped counters, to be used
+   * in `String#replace()` calls.
+   * The scoped counter removes the matched value
+   * from the input. */
   function countFactory(addition) {
     return counter;
     function counter() {
@@ -398,10 +398,10 @@ function syllable(value) {
     }
   }
 
- /* Define scoped counters, to be used
-  * in `String#replace()` calls.
-  * The scoped counter does not remove the matched
-  * value from the input. */
+  /* Define scoped counters, to be used
+   * in `String#replace()` calls.
+   * The scoped counter does not remove the matched
+   * value from the input. */
   function returnFactory(addition) {
     return returner;
     function returner($0) {
