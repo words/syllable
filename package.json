@@ -12,7 +12,7 @@
     "bin"
   ],
   "homepage": "https://words.github.io/syllable/",
-  "repository": "https://github.com/words/syllable",
+  "repository": "words/syllable",
   "bugs": "https://github.com/words/syllable/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
