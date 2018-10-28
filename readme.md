@@ -82,8 +82,8 @@ Support for word-breaks and non-ASCII characters added later.
 
 [license]: license
 
-[author]: http://wooorm.com
+[author]: https://wooorm.com
 
 [stats]: https://github.com/DaveChild/Text-Statistics
 
-[lingua]: http://search.cpan.org/~gregfast/Lingua-EN-Syllable-0.251
+[lingua]: https://metacpan.org/pod/Lingua::EN::Syllable

@@ -107,10 +107,7 @@ test('cli', function(t) {
 // The unit tests include in- and output values provided by the original, and
 // ancestor source code.
 //
-// The only test provided by the original code:
-// <http://search.cpan.org/~gregfast/Lingua-EN-Syllable-0.251/Syllable.pm>
-//
-// The test provided by Text-Statistics:
+// The tests by Text-Statistics:
 // <https://github.com/DaveChild/Text-Statistics>
 //
 // This library focusses on the required Text-Statistics tests (the library

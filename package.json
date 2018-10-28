@@ -14,9 +14,9 @@
   "homepage": "https://words.github.io/syllable/",
   "repository": "words/syllable",
   "bugs": "https://github.com/words/syllable/issues",
-  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
   "contributors": [
-    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
   ],
   "files": [
     "problematic.json",
