@@ -59,10 +59,10 @@ test('cli', function(t) {
 
   execa('./cli.js', ['  ']).then(
     function() {},
-    function(err) {
-      t.equal(err.code, 1, 'should exit with `1` without input')
+    function(error) {
+      t.equal(error.code, 1, 'should exit with `1` without input')
       t.ok(
-        /\s*Usage: syllable \[options] <words...>/.test(err.stderr),
+        /\s*Usage: syllable \[options] <words...>/.test(error.stderr),
         'Should emit the help message'
       )
     }
