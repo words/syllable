@@ -35,6 +35,8 @@ test('api', function(t) {
     'should support non-ascii characters (2)'
   )
 
+  t.equal(syllable('Snuffleupagus'), 5, 'GH-25 (snuffleupagus)')
+
   t.end()
 })
 
