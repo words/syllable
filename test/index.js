@@ -36,6 +36,7 @@ test('api', function(t) {
   )
 
   t.equal(syllable('Snuffleupagus'), 5, 'GH-25 (snuffleupagus)')
+  t.equal(syllable('queue'), 1, 'GH-26 (queue)')
 
   t.end()
 })
