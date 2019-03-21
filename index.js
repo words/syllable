@@ -157,7 +157,8 @@ var EXPRESSION_SINGLE = new RegExp(
         'pre',
         'pro',
         'dis',
-        'side'
+        'side',
+        'some'
       ].join('|') +
       ')',
     '(?:' +
@@ -210,7 +211,8 @@ var EXPRESSION_DOUBLE = new RegExp(
         'kilo',
         'pico',
         'nano',
-        'macro'
+        'macro',
+        'somer'
       ].join('|') +
       ')',
     '(?:' + ['fully', 'berry', 'woman', 'women', 'edly'].join('|') + ')$'
