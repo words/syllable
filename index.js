@@ -114,6 +114,7 @@ var EXPRESSION_DOUBLE_SYLLABIC_ONE = new RegExp(
 
 var EXPRESSION_DOUBLE_SYLLABIC_TWO = new RegExp(
   [
+    '^creat(?!u)',
     '[^gq]ua[^auieo]',
     '[aeiou]{3}',
     '^(?:ia|mc|coa[dglx].)',
