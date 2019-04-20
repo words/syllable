@@ -114,6 +114,7 @@ var EXPRESSION_DOUBLE_SYLLABIC_ONE = new RegExp(
 
 var EXPRESSION_DOUBLE_SYLLABIC_TWO = new RegExp(
   [
+    'creat(?!u)',
     '[^gq]ua[^auieo]',
     '[aeiou]{3}',
     '^(?:ia|mc|coa[dglx].)',
@@ -221,7 +222,7 @@ var EXPRESSION_DOUBLE = new RegExp(
 )
 
 // Expression to match triple syllable suffixes.
-var EXPRESSION_TRIPLE = /(ology|ologist|onomy|onomist)$/g
+var EXPRESSION_TRIPLE = /(creations?|ology|ologist|onomy|onomist)$/g
 
 // Expression to split on word boundaries.
 var SPLIT = /\b/g
