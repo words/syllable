@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-- lts/boron
-- node
+  - lts/dubnium
+  - node
 sudo: false
 after_script: bash <(curl -s https://codecov.io/bash)
 deploy:
@@ -10,7 +10,7 @@ deploy:
   api_key:
     secure: rsgdAJUGN9h57xOpxpI/bBRI23sYWbzMlWCw46FZMV8BZuolSfBciTj1tblcuRL03gwNoDrBeOJOJJ5TlqL671hDIQ1NlRPJ1FomRePWMIWFYz1RKnHd9aYLe+hcNudVF6cfpMVJGDtzhIJIOIXslJJ/+wAYluwlQrwB9SubfoU=
   file:
-    - "syllable.js"
-    - "syllable.min.js"
+    - 'syllable.js'
+    - 'syllable.min.js'
   on:
     tags: true
