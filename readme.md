@@ -7,15 +7,15 @@
 
 Syllable count in JavaScript.
 
-## Installation
+## Install
 
 [npm][]:
 
-```bash
+```sh
 npm install syllable
 ```
 
-## Usage
+## API
 
 ```javascript
 var syllable = require('syllable')
@@ -32,14 +32,6 @@ syllable('Åland') // 2
 ```
 
 ## CLI
-
-Install:
-
-```bash
-npm install --global syllable
-```
-
-Use:
 
 ```text
 Usage: syllable [options] <words...>
@@ -64,10 +56,10 @@ $ echo "syllable unicorn banana" | syllable
 
 ## Inspiration
 
-Based on the syllable functionality found in [**Text-Statistics**][stats]
-(PHP), in turn inspired by [**Lingua-EN-Syllable**][lingua] (Perl).
+Based on the syllable functionality found in [`Text-Statistics`][stats] (PHP),
+in turn inspired by [`Lingua::EN::Syllable`][lingua] (Perl).
 
-Support for word-breaks and non-ASCII characters added later.
+Support for word-breaks, non-ASCII characters, and many fixes added later.
 
 ## License
 
