@@ -1,4 +1,9 @@
-# syllable [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
+# syllable
+
+[![Build][build-badge]][build]
+[![Coverage][coverage-badge]][coverage]
+[![Downloads][downloads-badge]][downloads]
+[![Size][size-badge]][size]
 
 Syllable count in JavaScript.
 
@@ -70,13 +75,21 @@ Support for word-breaks and non-ASCII characters added later.
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/words/syllable.svg
+[build-badge]: https://img.shields.io/travis/words/syllable.svg
 
-[travis]: https://travis-ci.org/words/syllable
+[build]: https://travis-ci.org/words/syllable
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/words/syllable.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/words/syllable.svg
 
-[codecov]: https://codecov.io/github/words/syllable
+[coverage]: https://codecov.io/github/words/syllable
+
+[downloads-badge]: https://img.shields.io/npm/dm/syllable.svg
+
+[downloads]: https://www.npmjs.com/package/syllable
+
+[size-badge]: https://img.shields.io/bundlephobia/minzip/syllable.svg
+
+[size]: https://bundlephobia.com/result?p=syllable
 
 [npm]: https://docs.npmjs.com/cli/install
 
