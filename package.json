@@ -1,0 +1,72 @@
+{
+  "name": "www-syllable",
+  "private": true,
+  "license": "MIT",
+  "repository": "words/syllable",
+  "bugs": "https://github.com/words/syllable/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
+  ],
+  "devDependencies": {
+    "browserify": "^16.0.0",
+    "cssnano": "^4.0.0",
+    "postcss-cli": "^6.0.0",
+    "postcss-preset-env": "^6.6.0",
+    "prettier": "^1.12.1",
+    "rehype-cli": "^7.0.0",
+    "rehype-preset-minify": "^3.0.0",
+    "rehype-prevent-favicon-request": "^1.0.0",
+    "remark-cli": "^6.0.0",
+    "remark-preset-wooorm": "^5.0.0",
+    "stylelint": "^10.0.0",
+    "stylelint-config-standard": "^18.0.0",
+    "syllable": "^3.6.1",
+    "tinyify": "^2.5.0",
+    "xo": "^0.24.0"
+  },
+  "scripts": {
+    "format": "remark . -qfo && prettier --write \"**/*.js\" && xo --fix && stylelint src/index.css --fix",
+    "build:js": "browserify src -o dest/index.js",
+    "build:css": "postcss src/index.css -o dest/index.css",
+    "build:html": "rehype -u preset-minify -u prevent-favicon-request src -o dest",
+    "build": "npm run build:js && npm run build:css && npm run build:html",
+    "test": "npm run format && npm run build"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "semi": false,
+    "trailingComma": "none"
+  },
+  "xo": {
+    "prettier": true,
+    "esnext": false,
+    "rules": {
+      "unicorn/prefer-node-append": "off"
+    }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "postcss": {
+    "plugins": {
+      "postcss-preset-env": {},
+      "cssnano": {
+        "preset": "default"
+      }
+    }
+  },
+  "remarkConfig": {
+    "plugins": [
+      "preset-wooorm"
+    ]
+  }
+}
