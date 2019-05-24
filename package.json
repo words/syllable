@@ -27,7 +27,7 @@
   },
   "scripts": {
     "format": "remark . -qfo && prettier --write \"**/*.js\" && xo --fix && stylelint src/index.css --fix",
-    "build:js": "browserify src -o dest/index.js",
+    "build:js": "browserify src -p tinyify -o dest/index.js",
     "build:css": "postcss src/index.css -o dest/index.css",
     "build:html": "rehype -u preset-minify -u prevent-favicon-request src -o dest",
     "build": "npm run build:js && npm run build:css && npm run build:html",
