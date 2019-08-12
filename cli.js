@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 'use strict'
 
-var trim = require('trim')
 var pack = require('./package.json')
 var syllable = require('.')
 
@@ -68,4 +67,8 @@ function help() {
 
 function sum(a, b) {
   return a + b
+}
+
+function trim(d) {
+  return d.trim()
 }
