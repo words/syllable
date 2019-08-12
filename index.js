@@ -133,7 +133,8 @@ var EXPRESSION_DOUBLE_SYLLABIC_THREE = new RegExp(
     'io',
     'ii',
     'uen',
-    'real',
+    '[aeilotu]real',
+    'real[aeilotu]',
     'iell',
     'eo[^aeiou]',
     '[aeiou]y[aeiou]'

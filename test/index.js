@@ -38,6 +38,10 @@ test('api', function(t) {
   t.equal(syllable('Snuffleupagus'), 5, 'GH-25 (snuffleupagus)')
   t.equal(syllable('queue'), 1, 'GH-26 (queue)')
 
+  t.equal(syllable('real'), 1, 'GH-31 (real/deal/really)')
+  t.equal(syllable('deal'), 1, 'GH-31 (real/deal/really)')
+  t.equal(syllable('really'), 2, 'GH-31 (real/deal/really)')
+
   t.end()
 })
 
