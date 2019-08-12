@@ -3,8 +3,8 @@
 var Stream = require('stream').PassThrough
 var test = require('tape')
 var execa = require('execa')
-var fixtures = require('./fixture.json')
 var pack = require('../package.json')
+var fixtures = require('./fixture.json')
 var syllable = require('..')
 
 test('api', function(t) {
@@ -63,7 +63,7 @@ test('cli', function(t) {
   execa('./cli.js', ['  ']).then(
     function() {},
     function(error) {
-      t.equal(error.code, 1, 'should exit with `1` without input')
+      t.equal(error.exitCode, 1, 'should exit with `1` without input')
       t.ok(
         /\s*Usage: syllable \[options] <words...>/.test(error.stderr),
         'Should emit the help message'
