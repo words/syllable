@@ -12,6 +12,7 @@ var own = {}.hasOwnProperty
 // syllables, but should be counted as one.
 var EXPRESSION_MONOSYLLABIC_ONE = new RegExp(
   [
+    'awe($|d|so)',
     'cia(?:l|$)',
     'tia',
     'cius',
@@ -217,7 +218,7 @@ var EXPRESSION_DOUBLE = new RegExp(
         'somer'
       ].join('|') +
       ')',
-    '(?:' + ['fully', 'berry', 'woman', 'women', 'edly'].join('|') + ')$'
+    '(?:fully|berry|woman|women|edly)$'
   ].join('|'),
   'g'
 )
