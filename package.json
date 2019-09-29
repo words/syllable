@@ -21,10 +21,11 @@
   "files": [
     "problematic.json",
     "index.js",
-    "cli.js"
+    "cli.js",
+    "index.d.ts"
   ],
   "bin": "cli.js",
-  "types": "./index.d.ts",
+  "types": "index.d.ts",
   "dependencies": {
     "normalize-strings": "^1.1.0",
     "pluralize": "^8.0.0"
