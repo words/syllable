@@ -1,3 +1,16 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light dark;
+  background-color: hsl(0, 0%, 90%);
+}
+
+a {
+  color: #0367d8;
+}
+
 body {
   font-family: system-ui;
   margin: 3em auto;
@@ -5,11 +18,20 @@ body {
 }
 
 textarea {
+  font: inherit;
   display: block;
   width: 100%;
-  margin: 1em 0;
+  margin: calc(1em + 1ex) 0;
+  padding: calc(0.5 * 1em + 1ex);
 }
 
 output {
   font-weight: bold;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: hsl(214, 13%, 10%);
+    color: hsl(214, 13%, 90%);
+  }
 }
