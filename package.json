@@ -34,7 +34,6 @@
   },
   "devDependencies": {
     "browserify": "^16.0.0",
-    "execa": "^2.0.0",
     "nyc": "^15.0.0",
     "prettier": "^1.0.0",
     "remark-cli": "^7.0.0",

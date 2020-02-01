@@ -1,9 +1,9 @@
 'use strict'
 
-var Stream = require('stream').PassThrough
+var exec = require('child_process').exec
+var PassThrough = require('stream').PassThrough
 var test = require('tape')
-var execa = require('execa')
-var pack = require('../package.json')
+var version = require('../package.json').version
 var fixtures = require('./fixture.json')
 var syllable = require('..')
 
@@ -70,65 +70,54 @@ test('api', function(t) {
 })
 
 test('cli', function(t) {
-  var help = ['-h', '--help']
-  var version = ['-v', '--version']
-  var stream
+  var input = new PassThrough()
+  var helps = ['-h', '--help']
+  var versions = ['-v', '--version']
 
-  t.plan(10)
+  t.plan(8)
 
-  execa('./cli.js', ['syllables']).then(function(result) {
-    t.equal(result.stdout, '3', 'Should accept an argument')
-  }, t.ifErr)
-
-  execa('./cli.js', ['syllables', 'unicorns']).then(function(result) {
-    t.equal(result.stdout, '6', 'Should accept arguments')
-  }, t.ifErr)
-
-  execa('./cli.js', ['syllables unicorns']).then(function(result) {
-    t.equal(result.stdout, '6', 'Should accept values')
-  }, t.ifErr)
-
-  execa('./cli.js', ['  ']).then(
-    function() {},
-    function(error) {
-      t.equal(error.exitCode, 1, 'should exit with `1` without input')
-      t.ok(
-        /\s*Usage: syllable \[options] <words...>/.test(error.stderr),
-        'Should emit the help message'
-      )
-    }
-  )
-
-  help.forEach(function(flag) {
-    execa('./cli.js', [flag]).then(function(result) {
-      t.ok(
-        /\s*Usage: syllable \[options] <words...>/.test(result.stdout),
-        'Should accept `' + flag + '`'
-      )
-    }, t.ifErr)
+  exec('./cli.js syllables', function(err, stdout, stderr) {
+    t.deepEqual([err, stdout, stderr], [null, '3\n', ''], 'one')
   })
 
-  version.forEach(function(flag) {
-    execa('./cli.js', [flag]).then(function(result) {
-      t.equal(result.stdout, pack.version, 'Should accept `' + flag + '`')
-    }, t.ifErr)
+  exec('./cli.js syllables unicorns', function(err, stdout, stderr) {
+    t.deepEqual([err, stdout, stderr], [null, '6\n', ''], 'two')
   })
 
-  stream = new Stream()
+  exec('./cli.js ""', function(err, stdout, stderr) {
+    t.deepEqual(
+      [Boolean(err), stdout, /Usage: syllable/.test(stderr)],
+      [true, '', true],
+      'no arguments'
+    )
+  })
 
-  execa('./cli.js', {input: stream}).then(function(result) {
-    t.equal(result.stdout, '6', 'Should accept stdin')
-  }, t.ifErr)
+  var subprocess = exec('./cli.js', function(err, stdout, stderr) {
+    t.deepEqual([err, stdout, stderr], [null, '6\n', ''], 'stdin')
+  })
 
+  input.pipe(subprocess.stdin)
+  input.write('syllab')
   setImmediate(function() {
-    stream.write('syllab')
-
+    input.write('les uni')
     setImmediate(function() {
-      stream.write('les uni')
+      input.end('corns')
+    })
+  })
 
-      setImmediate(function() {
-        stream.end('corns')
-      })
+  helps.forEach(function(flag) {
+    exec('./cli.js ' + flag, function(err, stdout, stderr) {
+      t.deepEqual(
+        [err, /\sUsage: syllable/.test(stdout), stderr],
+        [null, true, ''],
+        flag
+      )
+    })
+  })
+
+  versions.forEach(function(flag) {
+    exec('./cli.js ' + flag, function(err, stdout, stderr) {
+      t.deepEqual([err, stdout, stderr], [null, version + '\n', ''], flag)
     })
   })
 })
