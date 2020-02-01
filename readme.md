@@ -17,7 +17,7 @@ npm install syllable
 
 ## API
 
-```javascript
+```js
 var syllable = require('syllable')
 
 syllable('syllable') // 3
@@ -33,7 +33,7 @@ syllable('Åland') // 2
 
 ## CLI
 
-```text
+```txt
 Usage: syllable [options] <words...>
 
 Syllable count in an English word
@@ -60,6 +60,49 @@ Based on the syllable functionality found in [`Text-Statistics`][stats] (PHP),
 in turn inspired by [`Lingua::EN::Syllable`][lingua] (Perl).
 
 Support for word-breaks, non-ASCII characters, and many fixes added later.
+
+## Related
+
+*   [`automated-readability`](https://github.com/words/automated-readability)
+    — Formula to detect ease of reading according to the Automated Readability
+    Index (1967)
+*   [`buzzwords`](https://github.com/words/buzzwords)
+    — List of buzzwords
+*   [`coleman-liau`](https://github.com/words/coleman-liau)
+    — Formula to detect the ease of reading a text according to the Coleman-Liau
+    index (1975)
+*   [`cuss`](https://github.com/words/cuss)
+    — Map of profane words to a rating of sureness
+*   [`dale-chall`](https://github.com/words/dale-chall)
+    — List of easy American-English words: The New Dale-Chall (1995)
+*   [`dale-chall-formula`](https://github.com/words/dale-chall-formula)
+    — Formula to find the grade level according to the (revised) Dale–Chall
+    Readability Formula (1995)
+*   [`fillers`](https://github.com/words/fillers)
+    — List of filler words
+*   [`flesch`](https://github.com/words/flesch)
+    — Formula to detect the ease of reading a text according to Flesch Reading
+    Ease (1975)
+*   [`flesch-kincaid`](https://github.com/words/flesch-kincaid)
+    — Formula to detect the grade level of text according to Flesch–Kincaid
+    Grade Level (1975)
+*   [`gunning-fog`](https://github.com/words/gunning-fog)
+    — Formula to detect the ease of reading a text according to the Gunning fog
+    index (1952)
+*   [`hedges`](https://github.com/words/hedges)
+    — List of hedge words
+*   [`profanities`](https://github.com/words/profanities)
+    — List of profane words
+*   [`smog-formula`](https://github.com/words/smog-formula)
+    — Formula to detect the ease of reading a text according to the SMOG
+    (Simple Measure of Gobbledygook) formula (1969)
+*   [`spache`](https://github.com/words/spache)
+    — List of familiar American-English words (1974)
+*   [`spache-formula`](https://github.com/words/spache-formula)
+    — Uses a dictionary, suited for lower reading levels
+*   [`weasels`](https://github.com/words/weasels)
+    — Formula to detect the grade level of text according to the (revised)
+    Spache Readability Formula (1974)
 
 ## License
 
