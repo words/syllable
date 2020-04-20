@@ -218,7 +218,7 @@ var EXPRESSION_DOUBLE = new RegExp(
         'somer'
       ].join('|') +
       ')',
-    '(?:fully|berry|woman|women|edly)$'
+    '(?:fully|berry|woman|women|edly|((?:[bcdfghjklmnpqrstvwxz])|[aeiou])ye?ing)$'
   ].join('|'),
   'g'
 )
