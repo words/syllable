@@ -75,7 +75,7 @@ var EXPRESSION_MONOSYLLABIC_TWO = new RegExp(
       'g[hn]',
       'l[lv]',
       'mm',
-      'n[cgn]',
+      'n[cgns]',
       'r[cnsv]',
       'squ',
       's[cklst]',

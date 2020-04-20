@@ -66,6 +66,12 @@ test('api', function(t) {
     'GH-32 (awe)'
   )
 
+  t.deepEqual(
+    ['expanse', 'tense', 'expense', 'rinse', 'response'].map(syllable),
+    [2, 1, 2, 1, 2],
+    'GH-39 ([aeiouy]nse$)'
+  )
+
   t.end()
 })
 
