@@ -21,10 +21,7 @@ if (argv.indexOf('--help') !== -1 || argv.indexOf('-h') !== -1) {
 }
 
 function getSyllables(value) {
-  value = value
-    .split(/\s+/g)
-    .map(trim)
-    .filter(Boolean)
+  value = value.split(/\s+/g).map(trim).filter(Boolean)
 
   if (value.length === 0) {
     process.stderr.write(help())

@@ -7,7 +7,7 @@ var version = require('../package.json').version
 var fixtures = require('./fixture.json')
 var syllable = require('..')
 
-test('api', function(t) {
+test('api', function (t) {
   var result = syllable('syllables')
 
   t.equal(syllable('SYLLABLES'), result, 'should be case insensitive (1)')
@@ -265,22 +265,22 @@ test('api', function(t) {
   t.end()
 })
 
-test('cli', function(t) {
+test('cli', function (t) {
   var input = new PassThrough()
   var helps = ['-h', '--help']
   var versions = ['-v', '--version']
 
   t.plan(8)
 
-  exec('./cli.js syllables', function(err, stdout, stderr) {
+  exec('./cli.js syllables', function (err, stdout, stderr) {
     t.deepEqual([err, stdout, stderr], [null, '3\n', ''], 'one')
   })
 
-  exec('./cli.js syllables unicorns', function(err, stdout, stderr) {
+  exec('./cli.js syllables unicorns', function (err, stdout, stderr) {
     t.deepEqual([err, stdout, stderr], [null, '6\n', ''], 'two')
   })
 
-  exec('./cli.js ""', function(err, stdout, stderr) {
+  exec('./cli.js ""', function (err, stdout, stderr) {
     t.deepEqual(
       [Boolean(err), stdout, /Usage: syllable/.test(stderr)],
       [true, '', true],
@@ -288,21 +288,21 @@ test('cli', function(t) {
     )
   })
 
-  var subprocess = exec('./cli.js', function(err, stdout, stderr) {
+  var subprocess = exec('./cli.js', function (err, stdout, stderr) {
     t.deepEqual([err, stdout, stderr], [null, '6\n', ''], 'stdin')
   })
 
   input.pipe(subprocess.stdin)
   input.write('syllab')
-  setImmediate(function() {
+  setImmediate(function () {
     input.write('les uni')
-    setImmediate(function() {
+    setImmediate(function () {
       input.end('corns')
     })
   })
 
-  helps.forEach(function(flag) {
-    exec('./cli.js ' + flag, function(err, stdout, stderr) {
+  helps.forEach(function (flag) {
+    exec('./cli.js ' + flag, function (err, stdout, stderr) {
       t.deepEqual(
         [err, /\sUsage: syllable/.test(stdout), stderr],
         [null, true, ''],
@@ -311,8 +311,8 @@ test('cli', function(t) {
     })
   })
 
-  versions.forEach(function(flag) {
-    exec('./cli.js ' + flag, function(err, stdout, stderr) {
+  versions.forEach(function (flag) {
+    exec('./cli.js ' + flag, function (err, stdout, stderr) {
       t.deepEqual([err, stdout, stderr], [null, version + '\n', ''], flag)
     })
   })
@@ -328,7 +328,7 @@ test('cli', function(t) {
 //
 // This library focusses on the required Text-Statistics tests (the library
 // provides both optional and required tests).
-test('fixtures', function(t) {
+test('fixtures', function (t) {
   var key
   var expected
   var overwrite = {
