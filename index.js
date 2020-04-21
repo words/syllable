@@ -75,7 +75,7 @@ var EXPRESSION_MONOSYLLABIC_TWO = new RegExp(
       'g[hn]',
       'l[lv]',
       'mm',
-      'n[cgn]',
+      'n[cgns]',
       'r[cnsv]',
       'squ',
       's[cklst]',
@@ -106,6 +106,7 @@ var EXPRESSION_DOUBLE_SYLLABIC_ONE = new RegExp(
       'ua',
       'react?',
       'orbed', // Cancel `'.[^aeiuoycgltdb]{2,}ed$',`
+      'shred', // Cancel `'.[^aeiuoycgltdb]{2,}ed$',`
       'eings?',
       '[aeiouy]sh?e[rs]'
     ].join('|') +
@@ -119,7 +120,8 @@ var EXPRESSION_DOUBLE_SYLLABIC_TWO = new RegExp(
     '[^gq]ua[^auieo]',
     '[aeiou]{3}',
     '^(?:ia|mc|coa[dglx].)',
-    '^re(app|es|im|us)'
+    '^re(app|es|im|us)',
+    '(th|d)eist'
   ].join('|'),
   'g'
 )
@@ -180,7 +182,7 @@ var EXPRESSION_SINGLE = new RegExp(
         'sides?',
         'ports?',
         'shires?',
-        'tion(?:ed|s)?'
+        '[gnst]ion(?:ed|s)?'
       ].join('|') +
       ')$'
   ].join('|'),
@@ -218,7 +220,7 @@ var EXPRESSION_DOUBLE = new RegExp(
         'somer'
       ].join('|') +
       ')',
-    '(?:fully|berry|woman|women|edly)$'
+    '(?:fully|berry|woman|women|edly|union|((?:[bcdfghjklmnpqrstvwxz])|[aeiou])ye?ing)$'
   ].join('|'),
   'g'
 )

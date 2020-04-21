@@ -66,6 +66,202 @@ test('api', function(t) {
     'GH-32 (awe)'
   )
 
+  t.deepEqual(
+    [
+      'communion',
+      'contagion',
+      'decision',
+      'division',
+      'erosion',
+      'occasion',
+      'opinion',
+      'religion',
+      'reunion',
+      'bunion',
+      'fission',
+      'fusion',
+      'mission',
+      'nation',
+      'onion',
+      'passion',
+      'region',
+      'session',
+      'union',
+      'version',
+      'vision'
+    ].map(syllable),
+    [3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    'GH-36 ([gnst]ion$)'
+  )
+
+  t.deepEqual(
+    [
+      'anybody',
+      'anymore',
+      'anyone',
+      'anyones',
+      'anyplace',
+      'anything',
+      'anythings',
+      'anytime',
+      'anyway',
+      'anyways',
+      'anywhere'
+    ].map(syllable),
+    [4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+    'GH-36 ^any'
+  )
+
+  t.deepEqual(
+    [
+      'anyone',
+      'everyone',
+      'alone',
+      'lonely',
+      'ozone',
+      'one',
+      'bone',
+      'phone'
+    ].map(syllable),
+    [3, 3, 2, 2, 2, 1, 1, 1],
+    'GH-36 one$'
+  )
+
+  t.deepEqual(
+    [
+      'embodying',
+      'annoying',
+      'buoying',
+      'busying',
+      'envying',
+      'jurying',
+      'nosying',
+      'obeying',
+      'pitying',
+      'untying',
+      'braying',
+      'buying',
+      'cloying',
+      'crying',
+      'drying',
+      'dying',
+      'eying',
+      'eyeing',
+      'flying',
+      'lying',
+      'paying',
+      'plying',
+      'saying',
+      'spraying',
+      'toying',
+      'trying',
+      'tying',
+      'vying',
+      'ying'
+    ].map(syllable),
+    [
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1
+    ],
+    'GH-37 (ying$)'
+  )
+
+  t.deepEqual(
+    [
+      'shreds',
+      'shredded',
+      'shredder',
+      'shredders',
+      'shredding',
+      'shredless'
+    ].map(syllable),
+    [1, 2, 2, 2, 2, 2],
+    'GH-37 shredless'
+  )
+
+  t.deepEqual(
+    [
+      'monotheist',
+      'monotheists',
+      'monotheistic',
+      'polytheist',
+      'polytheists',
+      'polytheistic',
+      'atheist',
+      'atheists',
+      'atheistic',
+      'pantheist',
+      'pantheists',
+      'pantheistic',
+      'deist',
+      'deists',
+      'deistic',
+      'theist',
+      'theists',
+      'theistic',
+      'heist'
+    ].map(syllable),
+    [4, 4, 5, 4, 4, 5, 3, 3, 4, 3, 3, 4, 2, 2, 3, 2, 2, 3, 1],
+    'GH-37 (th|d)iest(s|ic)?)'
+  )
+
+  t.deepEqual(
+    [
+      'reminiscense',
+      'commonsense',
+      'innocense',
+      'recompense',
+      'condense',
+      'defense',
+      'dispense',
+      'expanse',
+      'expense',
+      'immense',
+      'intense',
+      'license',
+      'mouthrinse',
+      'nonsense',
+      'offense',
+      'pretense',
+      'response',
+      'suspense',
+      'cleanse',
+      'dense',
+      'rinse',
+      'sense',
+      'tense'
+    ].map(syllable),
+    [4, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1],
+    'GH-39 ([aeiouy]nse$)'
+  )
+
   t.end()
 })
 
