@@ -119,7 +119,8 @@ var EXPRESSION_DOUBLE_SYLLABIC_TWO = new RegExp(
     '[^gq]ua[^auieo]',
     '[aeiou]{3}',
     '^(?:ia|mc|coa[dglx].)',
-    '^re(app|es|im|us)'
+    '^re(app|es|im|us)',
+    '(th|d)eist'
   ].join('|'),
   'g'
 )

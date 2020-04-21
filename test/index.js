@@ -161,6 +161,32 @@ test('api', function(t) {
   )
 
   t.deepEqual(
+    [
+      'monotheist',
+      'monotheists',
+      'monotheistic',
+      'polytheist',
+      'polytheists',
+      'polytheistic',
+      'atheist',
+      'atheists',
+      'atheistic',
+      'pantheist',
+      'pantheists',
+      'pantheistic',
+      'deist',
+      'deists',
+      'deistic',
+      'theist',
+      'theists',
+      'theistic',
+      'heist'
+    ].map(syllable),
+    [4, 4, 5, 4, 4, 5, 3, 3, 4, 3, 3, 4, 2, 2, 3, 2, 2, 3, 1],
+    'GH-37 (th|d)iest(s|ic)?)'
+  )
+
+  t.deepEqual(
     ['expanse', 'tense', 'expense', 'rinse', 'response'].map(syllable),
     [2, 1, 2, 1, 2],
     'GH-39 ([aeiouy]nse$)'
