@@ -180,7 +180,7 @@ var EXPRESSION_SINGLE = new RegExp(
         'sides?',
         'ports?',
         'shires?',
-        'tion(?:ed|s)?'
+        '[gnst]ion(?:ed|s)?'
       ].join('|') +
       ')$'
   ].join('|'),
@@ -218,7 +218,7 @@ var EXPRESSION_DOUBLE = new RegExp(
         'somer'
       ].join('|') +
       ')',
-    '(?:fully|berry|woman|women|edly|((?:[bcdfghjklmnpqrstvwxz])|[aeiou])ye?ing)$'
+    '(?:fully|berry|woman|women|edly|union|((?:[bcdfghjklmnpqrstvwxz])|[aeiou])ye?ing)$'
   ].join('|'),
   'g'
 )

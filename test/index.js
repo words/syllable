@@ -46,6 +46,56 @@ test('api', function(t) {
 
   t.deepEqual(
     [
+      'awe',
+      'awearied',
+      'aweary',
+      'aweather',
+      'aweband',
+      'awedness',
+      'awee',
+      'aweek',
+      'aweel',
+      'aweigh',
+      'awesome',
+      'awesomely',
+      'awesomeness',
+      'awest',
+      'aweto'
+    ].map(syllable),
+    [1, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 3, 3, 2, 3],
+    'GH-32 (awe)'
+  )
+
+  t.deepEqual(
+    [
+      'communion',
+      'contagion',
+      'decision',
+      'division',
+      'erosion',
+      'occasion',
+      'opinion',
+      'religion',
+      'reunion',
+      'bunion',
+      'fission',
+      'fusion',
+      'mission',
+      'nation',
+      'onion',
+      'passion',
+      'region',
+      'session',
+      'union',
+      'version',
+      'vision'
+    ].map(syllable),
+    [3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    'GH-36 ([gnst]ion$)'
+  )
+
+  t.deepEqual(
+    [
       'embodying',
       'annoying',
       'buoying',
@@ -108,28 +158,6 @@ test('api', function(t) {
       1
     ],
     'GH-37 (ying$)'
-  )
-
-  t.deepEqual(
-    [
-      'awe',
-      'awearied',
-      'aweary',
-      'aweather',
-      'aweband',
-      'awedness',
-      'awee',
-      'aweek',
-      'aweel',
-      'aweigh',
-      'awesome',
-      'awesomely',
-      'awesomeness',
-      'awest',
-      'aweto'
-    ].map(syllable),
-    [1, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 3, 3, 2, 3],
-    'GH-32 (awe)'
   )
 
   t.deepEqual(
