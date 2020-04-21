@@ -96,6 +96,39 @@ test('api', function(t) {
 
   t.deepEqual(
     [
+      'anybody',
+      'anymore',
+      'anyone',
+      'anyones',
+      'anyplace',
+      'anything',
+      'anythings',
+      'anytime',
+      'anyway',
+      'anyways',
+      'anywhere'
+    ].map(syllable),
+    [4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+    'GH-36 ^any'
+  )
+
+  t.deepEqual(
+    [
+      'anyone',
+      'everyone',
+      'alone',
+      'lonely',
+      'ozone',
+      'one',
+      'bone',
+      'phone'
+    ].map(syllable),
+    [3, 3, 2, 2, 2, 1, 1, 1],
+    'GH-36 one$'
+  )
+
+  t.deepEqual(
+    [
       'embodying',
       'annoying',
       'buoying',
