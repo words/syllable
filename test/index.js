@@ -195,6 +195,19 @@ test('api', function(t) {
 
   t.deepEqual(
     [
+      'shreds',
+      'shredded',
+      'shredder',
+      'shredders',
+      'shredding',
+      'shredless'
+    ].map(syllable),
+    [1, 2, 2, 2, 2, 2],
+    'GH-37 shredless$'
+  )
+
+  t.deepEqual(
+    [
       'monotheist',
       'monotheists',
       'monotheistic',

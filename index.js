@@ -106,6 +106,7 @@ var EXPRESSION_DOUBLE_SYLLABIC_ONE = new RegExp(
       'ua',
       'react?',
       'orbed', // Cancel `'.[^aeiuoycgltdb]{2,}ed$',`
+      'shred', // Cancel `'.[^aeiuoycgltdb]{2,}ed$',`
       'eings?',
       '[aeiouy]sh?e[rs]'
     ].join('|') +
