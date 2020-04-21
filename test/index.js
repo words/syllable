@@ -203,7 +203,7 @@ test('api', function(t) {
       'shredless'
     ].map(syllable),
     [1, 2, 2, 2, 2, 2],
-    'GH-37 shredless$'
+    'GH-37 shredless'
   )
 
   t.deepEqual(
@@ -233,8 +233,32 @@ test('api', function(t) {
   )
 
   t.deepEqual(
-    ['expanse', 'tense', 'expense', 'rinse', 'response'].map(syllable),
-    [2, 1, 2, 1, 2],
+    [
+      'reminiscense',
+      'commonsense',
+      'innocense',
+      'recompense',
+      'condense',
+      'defense',
+      'dispense',
+      'expanse',
+      'expense',
+      'immense',
+      'intense',
+      'license',
+      'mouthrinse',
+      'nonsense',
+      'offense',
+      'pretense',
+      'response',
+      'suspense',
+      'cleanse',
+      'dense',
+      'rinse',
+      'sense',
+      'tense'
+    ].map(syllable),
+    [4, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1],
     'GH-39 ([aeiouy]nse$)'
   )
 
