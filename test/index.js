@@ -7,10 +7,12 @@ import test from 'tape'
 
 var own = {}.hasOwnProperty
 
+/** @type {Object.<string, unknown>} */
 var pack = JSON.parse(
   String(fs.readFileSync(new URL('../package.json', import.meta.url)))
 )
 
+/** @type {Object.<string, number>} */
 var fixtures = JSON.parse(
   String(fs.readFileSync(new URL('./fixture.json', import.meta.url)))
 )
@@ -347,14 +349,16 @@ test('cli', function (t) {
 // This library focusses on the required Text-Statistics tests (the library
 // provides both optional and required tests).
 test('fixtures', function (t) {
-  var key
-  var expected
   var overwrite = {
     // GH-22: <https://github.com/words/syllable/issues/22>,
     // Barbed is one syllable as well:
     // <https://www.howmanysyllables.com/words/barbed>
     arbed: 1
   }
+  /** @type {string} */
+  var key
+  /** @type {number} */
+  var expected
 
   for (key in fixtures) {
     if (own.call(fixtures, key)) {

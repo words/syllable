@@ -1,4 +1,5 @@
 import pluralize from 'pluralize'
+// @ts-ignore remove when typed.
 import normalize from 'normalize-strings'
 import {problematic} from './problematic.js'
 
@@ -225,6 +226,12 @@ var EXPRESSION_DOUBLE = new RegExp(
 var EXPRESSION_TRIPLE = /(creations?|ology|ologist|onomy|onomist)$/g
 
 // Wrapper to support multiple word-parts (GH-11).
+/**
+ * Syllable count
+ *
+ * @param {string} value
+ * @returns {number}
+ */
 export function syllable(value) {
   var values = normalize(String(value))
     .toLowerCase()
@@ -232,26 +239,34 @@ export function syllable(value) {
     .replace(/['’]/g, '')
     // Split on word boundaries.
     .split(/\b/g)
-  var length = values.length
   var index = -1
-  var total = 0
+  var sum = 0
 
-  while (++index < length) {
+  while (++index < values.length) {
     // Remove non-alphabetic characters from a given value.
-    total += one(values[index].replace(/[^a-z]/g, ''))
+    sum += one(values[index].replace(/[^a-z]/g, ''))
   }
 
-  return total
+  return sum
 }
 
-// Get syllables in a given value.
+/**
+ * Get syllables in a given value.
+ *
+ * @param {string} value
+ * @returns {number}
+ */
 function one(value) {
   var count = 0
+  /** @type {number} */
   var index
-  var length
+  /** @type {string} */
   var singular
+  /** @type {Array.<string>} */
   var parts
+  /** @type {ReturnType.<returnFactory>} */
   var addOne
+  /** @type {ReturnType.<returnFactory>} */
   var subtractOne
 
   if (value.length === 0) {
@@ -287,9 +302,8 @@ function one(value) {
   // Count multiple consonants.
   parts = value.split(/[^aeiouy]+/)
   index = -1
-  length = parts.length
 
-  while (++index < length) {
+  while (++index < parts.length) {
     if (parts[index] !== '') {
       count++
     }
@@ -312,20 +326,34 @@ function one(value) {
   // Make sure at least on is returned.
   return count || 1
 
-  // Define scoped counters, to be used in `String#replace()` calls.
-  // The scoped counter removes the matched value from the input.
+  /**
+   * Define scoped counters, to be used in `String#replace()` calls.
+   * The scoped counter removes the matched value from the input.
+   *
+   * @param {number} addition
+   */
   function countFactory(addition) {
     return counter
+    /**
+     * @returns {string}
+     */
     function counter() {
       count += addition
       return ''
     }
   }
 
-  // Define scoped counters, to be used in `String#replace()` calls.
-  // The scoped counter does not remove the matched value from the input.
+  /**
+   * This scoped counter does not remove the matched value from the input.
+   *
+   * @param {number} addition
+   */
   function returnFactory(addition) {
     return returner
+    /**
+     * @param {string} $0
+     * @returns {string}
+     */
     function returner($0) {
       count += addition
       return $0

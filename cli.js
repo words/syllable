@@ -3,6 +3,7 @@ import fs from 'fs'
 import {URL} from 'url'
 import {syllable} from './index.js'
 
+/** @type {Object.<string, unknown>} */
 var pack = JSON.parse(
   String(fs.readFileSync(new URL('./package.json', import.meta.url)))
 )
@@ -23,20 +24,26 @@ if (argv.includes('--help') || argv.includes('-h')) {
   getSyllables(argv.join(' '))
 }
 
+/**
+ * @param {string} value
+ */
 function getSyllables(value) {
-  value = value
+  var values = value
     .split(/\s+/g)
-    .map((d) => d.trim())
+    .map((/** @type {string} */ d) => d.trim())
     .filter(Boolean)
 
-  if (value.length === 0) {
+  if (values.length === 0) {
     process.stderr.write(help())
     process.exit(1)
   } else {
-    console.log(syllables(value))
+    console.log(syllables(values))
   }
 }
 
+/**
+ * @param {Array.<string>} values
+ */
 function syllables(values) {
   var sum = 0
   var index = -1
