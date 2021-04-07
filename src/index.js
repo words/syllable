@@ -1,8 +1,6 @@
-'use strict'
-
 /* eslint-env browser */
 
-var syllable = require('syllable')
+import {syllable} from 'syllable'
 
 var $input = document.querySelector('textarea')
 var $output = document.querySelector('output')
