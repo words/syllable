@@ -1,10 +1,6 @@
-'use strict'
-
-var pluralize = require('pluralize')
-var normalize = require('normalize-strings')
-var problematic = require('./problematic.json')
-
-module.exports = syllables
+import pluralize from 'pluralize'
+import normalize from 'normalize-strings'
+import {problematic} from './problematic.js'
 
 var own = {}.hasOwnProperty
 
@@ -228,34 +224,28 @@ var EXPRESSION_DOUBLE = new RegExp(
 // Expression to match triple syllable suffixes.
 var EXPRESSION_TRIPLE = /(creations?|ology|ologist|onomy|onomist)$/g
 
-// Expression to split on word boundaries.
-var SPLIT = /\b/g
-
-// Expression to merge elision.
-var APOSTROPHE = /['’]/g
-
-// Expression to remove non-alphabetic characters from a given value.
-var EXPRESSION_NONALPHABETIC = /[^a-z]/g
-
 // Wrapper to support multiple word-parts (GH-11).
-function syllables(value) {
+export function syllable(value) {
   var values = normalize(String(value))
     .toLowerCase()
-    .replace(APOSTROPHE, '')
-    .split(SPLIT)
+    // Remove apostrophes.
+    .replace(/['’]/g, '')
+    // Split on word boundaries.
+    .split(/\b/g)
   var length = values.length
   var index = -1
   var total = 0
 
   while (++index < length) {
-    total += syllable(values[index].replace(EXPRESSION_NONALPHABETIC, ''))
+    // Remove non-alphabetic characters from a given value.
+    total += one(values[index].replace(/[^a-z]/g, ''))
   }
 
   return total
 }
 
 // Get syllables in a given value.
-function syllable(value) {
+function one(value) {
   var count = 0
   var index
   var length

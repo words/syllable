@@ -22,40 +22,32 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
   ],
-  "files": [
-    "problematic.json",
-    "index.js",
-    "cli.js"
-  ],
+  "sideEffects": false,
+  "type": "module",
   "bin": "cli.js",
+  "main": "index.js",
+  "files": [
+    "cli.js",
+    "problematic.js",
+    "index.js"
+  ],
   "dependencies": {
     "normalize-strings": "^1.1.0",
     "pluralize": "^8.0.0"
   },
   "devDependencies": {
-    "browserify": "^17.0.0",
-    "nyc": "^15.0.0",
+    "c8": "^7.0.0",
     "prettier": "^2.0.0",
     "remark-cli": "^9.0.0",
     "remark-preset-wooorm": "^8.0.0",
     "tape": "^5.0.0",
-    "tinyify": "^3.0.0",
     "xo": "^0.38.0"
   },
   "scripts": {
     "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
-    "build-bundle": "browserify . -s syllable > syllable.js",
-    "build-mangle": "browserify . -s syllable -p tinyify > syllable.min.js",
-    "build": "npm run build-bundle && npm run build-mangle",
-    "test-api": "node test",
-    "test-coverage": "nyc --reporter lcov tape test/index.js",
-    "test": "npm run format && npm run build && npm run test-coverage"
-  },
-  "nyc": {
-    "check-coverage": true,
-    "lines": 100,
-    "functions": 100,
-    "branches": 100
+    "test-api": "node test/index.js",
+    "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov node test/index.js",
+    "test": "npm run format && npm run test-coverage"
   },
   "prettier": {
     "tabWidth": 2,
@@ -67,14 +59,11 @@
   },
   "xo": {
     "prettier": true,
-    "esnext": false,
     "rules": {
-      "unicorn/prefer-includes": "off",
-      "guard-for-in": "off"
-    },
-    "ignores": [
-      "syllable.js"
-    ]
+      "import/no-mutable-exports": "off",
+      "no-var": "off",
+      "prefer-arrow-callback": "off"
+    }
   },
   "remarkConfig": {
     "plugins": [

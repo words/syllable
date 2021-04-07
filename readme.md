@@ -9,6 +9,9 @@ Syllable count in JavaScript.
 
 ## Install
 
+This package is ESM only: Node 12+ is needed to use it and it must be `import`ed
+instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -17,8 +20,11 @@ npm install syllable
 
 ## API
 
+This package exports the following identifiers: `syllable`.
+There is no default export.
+
 ```js
-var syllable = require('syllable')
+import {syllable} from 'syllable'
 
 syllable('syllable') // 3
 syllable('unicorn') // 3

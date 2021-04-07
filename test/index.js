@@ -1,11 +1,19 @@
-'use strict'
+import {exec} from 'child_process'
+import fs from 'fs'
+import {URL} from 'url'
+import {PassThrough} from 'stream'
+import {syllable} from '../index.js'
+import test from 'tape'
 
-var exec = require('child_process').exec
-var PassThrough = require('stream').PassThrough
-var test = require('tape')
-var version = require('../package.json').version
-var fixtures = require('./fixture.json')
-var syllable = require('..')
+var own = {}.hasOwnProperty
+
+var pack = JSON.parse(
+  String(fs.readFileSync(new URL('../package.json', import.meta.url)))
+)
+
+var fixtures = JSON.parse(
+  String(fs.readFileSync(new URL('./fixture.json', import.meta.url)))
+)
 
 test('api', function (t) {
   var result = syllable('syllables')
@@ -316,13 +324,13 @@ test('cli', function (t) {
   })
 
   exec('./cli.js -v', function (error, stdout, stderr) {
-    t.deepEqual([error, stdout, stderr], [null, version + '\n', ''], '-v')
+    t.deepEqual([error, stdout, stderr], [null, pack.version + '\n', ''], '-v')
   })
 
   exec('./cli.js --version', function (error, stdout, stderr) {
     t.deepEqual(
       [error, stdout, stderr],
-      [null, version + '\n', ''],
+      [null, pack.version + '\n', ''],
       '--version'
     )
   })
@@ -349,8 +357,10 @@ test('fixtures', function (t) {
   }
 
   for (key in fixtures) {
-    expected = (key in overwrite ? overwrite : fixtures)[key]
-    t.equal(syllable(key), expected, key)
+    if (own.call(fixtures, key)) {
+      expected = (key in overwrite ? overwrite : fixtures)[key]
+      t.equal(syllable(key), expected, key)
+    }
   }
 
   t.end()
