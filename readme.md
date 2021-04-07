@@ -110,9 +110,9 @@ Support for word-breaks, non-ASCII characters, and many fixes added later.
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/words/syllable.svg
+[build-badge]: https://github.com/words/syllable/workflows/main/badge.svg
 
-[build]: https://travis-ci.org/words/syllable
+[build]: https://github.com/words/syllable/actions
 
 [coverage-badge]: https://img.shields.io/codecov/c/github/words/syllable.svg
 
