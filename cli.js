@@ -21,7 +21,10 @@ if (argv.indexOf('--help') !== -1 || argv.indexOf('-h') !== -1) {
 }
 
 function getSyllables(value) {
-  value = value.split(/\s+/g).map(trim).filter(Boolean)
+  value = value
+    .split(/\s+/g)
+    .map((d) => d.trim())
+    .filter(Boolean)
 
   if (value.length === 0) {
     process.stderr.write(help())
@@ -32,7 +35,14 @@ function getSyllables(value) {
 }
 
 function syllables(values) {
-  return values.map(syllable).reduce(sum)
+  var sum = 0
+  var index = -1
+
+  while (++index < values.length) {
+    sum += syllable(values[index])
+  }
+
+  return sum
 }
 
 function help() {
@@ -60,12 +70,4 @@ function help() {
       ''
     ].join('\n  ') + '\n'
   )
-}
-
-function sum(a, b) {
-  return a + b
-}
-
-function trim(d) {
-  return d.trim()
 }

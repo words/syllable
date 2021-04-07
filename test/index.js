@@ -39,7 +39,7 @@ test('api', function (t) {
   t.equal(syllable('queue'), 1, 'GH-26 (queue)')
 
   t.deepEqual(
-    ['real', 'deal', 'really'].map(syllable),
+    ['real', 'deal', 'really'].map((d) => syllable(d)),
     [1, 1, 2],
     'GH-31 (real/deal/really)'
   )
@@ -61,7 +61,7 @@ test('api', function (t) {
       'awesomeness',
       'awest',
       'aweto'
-    ].map(syllable),
+    ].map((d) => syllable(d)),
     [1, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 3, 3, 2, 3],
     'GH-32 (awe)'
   )
@@ -89,7 +89,7 @@ test('api', function (t) {
       'union',
       'version',
       'vision'
-    ].map(syllable),
+    ].map((d) => syllable(d)),
     [3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     'GH-36 ([gnst]ion$)'
   )
@@ -107,7 +107,7 @@ test('api', function (t) {
       'anyway',
       'anyways',
       'anywhere'
-    ].map(syllable),
+    ].map((d) => syllable(d)),
     [4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
     'GH-36 ^any'
   )
@@ -122,7 +122,7 @@ test('api', function (t) {
       'one',
       'bone',
       'phone'
-    ].map(syllable),
+    ].map((d) => syllable(d)),
     [3, 3, 2, 2, 2, 1, 1, 1],
     'GH-36 one$'
   )
@@ -158,7 +158,7 @@ test('api', function (t) {
       'tying',
       'vying',
       'ying'
-    ].map(syllable),
+    ].map((d) => syllable(d)),
     [
       4,
       3,
@@ -201,7 +201,7 @@ test('api', function (t) {
       'shredders',
       'shredding',
       'shredless'
-    ].map(syllable),
+    ].map((d) => syllable(d)),
     [1, 2, 2, 2, 2, 2],
     'GH-37 shredless'
   )
@@ -227,7 +227,7 @@ test('api', function (t) {
       'theists',
       'theistic',
       'heist'
-    ].map(syllable),
+    ].map((d) => syllable(d)),
     [4, 4, 5, 4, 4, 5, 3, 3, 4, 3, 3, 4, 2, 2, 3, 2, 2, 3, 1],
     'GH-37 (th|d)iest(s|ic)?)'
   )
@@ -257,7 +257,7 @@ test('api', function (t) {
       'rinse',
       'sense',
       'tense'
-    ].map(syllable),
+    ].map((d) => syllable(d)),
     [4, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1],
     'GH-39 ([aeiouy]nse$)'
   )
@@ -267,29 +267,27 @@ test('api', function (t) {
 
 test('cli', function (t) {
   var input = new PassThrough()
-  var helps = ['-h', '--help']
-  var versions = ['-v', '--version']
 
   t.plan(8)
 
-  exec('./cli.js syllables', function (err, stdout, stderr) {
-    t.deepEqual([err, stdout, stderr], [null, '3\n', ''], 'one')
+  exec('./cli.js syllables', function (error, stdout, stderr) {
+    t.deepEqual([error, stdout, stderr], [null, '3\n', ''], 'one')
   })
 
-  exec('./cli.js syllables unicorns', function (err, stdout, stderr) {
-    t.deepEqual([err, stdout, stderr], [null, '6\n', ''], 'two')
+  exec('./cli.js syllables unicorns', function (error, stdout, stderr) {
+    t.deepEqual([error, stdout, stderr], [null, '6\n', ''], 'two')
   })
 
-  exec('./cli.js ""', function (err, stdout, stderr) {
+  exec('./cli.js ""', function (error, stdout, stderr) {
     t.deepEqual(
-      [Boolean(err), stdout, /Usage: syllable/.test(stderr)],
+      [Boolean(error), stdout, /Usage: syllable/.test(stderr)],
       [true, '', true],
       'no arguments'
     )
   })
 
-  var subprocess = exec('./cli.js', function (err, stdout, stderr) {
-    t.deepEqual([err, stdout, stderr], [null, '6\n', ''], 'stdin')
+  var subprocess = exec('./cli.js', function (error, stdout, stderr) {
+    t.deepEqual([error, stdout, stderr], [null, '6\n', ''], 'stdin')
   })
 
   input.pipe(subprocess.stdin)
@@ -301,20 +299,32 @@ test('cli', function (t) {
     })
   })
 
-  helps.forEach(function (flag) {
-    exec('./cli.js ' + flag, function (err, stdout, stderr) {
-      t.deepEqual(
-        [err, /\sUsage: syllable/.test(stdout), stderr],
-        [null, true, ''],
-        flag
-      )
-    })
+  exec('./cli.js -h', function (error, stdout, stderr) {
+    t.deepEqual(
+      [error, /\sUsage: syllable/.test(stdout), stderr],
+      [null, true, ''],
+      '-h'
+    )
   })
 
-  versions.forEach(function (flag) {
-    exec('./cli.js ' + flag, function (err, stdout, stderr) {
-      t.deepEqual([err, stdout, stderr], [null, version + '\n', ''], flag)
-    })
+  exec('./cli.js --help', function (error, stdout, stderr) {
+    t.deepEqual(
+      [error, /\sUsage: syllable/.test(stdout), stderr],
+      [null, true, ''],
+      '--help'
+    )
+  })
+
+  exec('./cli.js -v', function (error, stdout, stderr) {
+    t.deepEqual([error, stdout, stderr], [null, version + '\n', ''], '-v')
+  })
+
+  exec('./cli.js --version', function (error, stdout, stderr) {
+    t.deepEqual(
+      [error, stdout, stderr],
+      [null, version + '\n', ''],
+      '--version'
+    )
   })
 })
 
