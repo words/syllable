@@ -10,6 +10,7 @@ var own = {}.hasOwnProperty
 var EXPRESSION_MONOSYLLABIC_ONE = new RegExp(
   [
     'awe($|d|so)',
+    'arge$',
     'cia(?:l|$)',
     'tia',
     'cius',
