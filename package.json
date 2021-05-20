@@ -40,7 +40,10 @@
   },
   "devDependencies": {
     "@types/tape": "^4.0.0",
+    "browser-resolve": "^2.0.0",
     "c8": "^7.0.0",
+    "esbuild": "^0.12.1",
+    "esmify": "^2.1.1",
     "prettier": "^2.0.0",
     "remark-cli": "^9.0.0",
     "remark-preset-wooorm": "^8.0.0",
@@ -56,7 +59,8 @@
     "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
     "test-api": "node test/index.js",
     "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov node test/index.js",
-    "test": "npm run build && npm run format && npm run test-coverage"
+    "test": "npm run build && npm run format && npm run test-coverage",
+    "browser": "esbuild --bundle --format=esm index.js"
   },
   "prettier": {
     "tabWidth": 2,
