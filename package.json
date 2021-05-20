@@ -60,7 +60,7 @@
     "test-api": "node test/index.js",
     "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov node test/index.js",
     "test": "npm run build && npm run format && npm run test-coverage",
-    "browser": "esbuild --bundle --format=esm index.js"
+    "browser": "mkdir build && esbuild --bundle --format=esm index.js > build/syllable-browser.js"
   },
   "prettier": {
     "tabWidth": 2,
