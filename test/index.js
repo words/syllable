@@ -5,20 +5,20 @@ import {PassThrough} from 'node:stream'
 import test from 'tape'
 import {syllable} from '../index.js'
 
-var own = {}.hasOwnProperty
+const own = {}.hasOwnProperty
 
 /** @type {Object.<string, unknown>} */
-var pack = JSON.parse(
+const pack = JSON.parse(
   String(fs.readFileSync(new URL('../package.json', import.meta.url)))
 )
 
 /** @type {Object.<string, number>} */
-var fixtures = JSON.parse(
+const fixtures = JSON.parse(
   String(fs.readFileSync(new URL('fixture.json', import.meta.url)))
 )
 
 test('api', function (t) {
-  var result = syllable('syllables')
+  const result = syllable('syllables')
 
   t.equal(syllable('SYLLABLES'), result, 'should be case insensitive (1)')
   t.equal(syllable('SyLlABlEs'), result, 'should be case insensitive (2)')
@@ -249,7 +249,7 @@ test('api', function (t) {
 })
 
 test('cli', function (t) {
-  var input = new PassThrough()
+  const input = new PassThrough()
 
   t.plan(8)
 
@@ -269,7 +269,7 @@ test('cli', function (t) {
     )
   })
 
-  var subprocess = exec('./cli.js', function (error, stdout, stderr) {
+  const subprocess = exec('./cli.js', function (error, stdout, stderr) {
     t.deepEqual([error, stdout, stderr], [null, '6\n', ''], 'stdin')
   })
 
@@ -322,20 +322,18 @@ test('cli', function (t) {
 // This library focusses on the required Text-Statistics tests (the library
 // provides both optional and required tests).
 test('fixtures', function (t) {
-  var overwrite = {
+  const overwrite = {
     // GH-22: <https://github.com/words/syllable/issues/22>,
     // Barbed is one syllable as well:
     // <https://www.howmanysyllables.com/words/barbed>
     arbed: 1
   }
   /** @type {string} */
-  var key
-  /** @type {number} */
-  var expected
+  let key
 
   for (key in fixtures) {
     if (own.call(fixtures, key)) {
-      expected = (key in overwrite ? overwrite : fixtures)[key]
+      const expected = (key in overwrite ? overwrite : fixtures)[key]
       t.equal(syllable(key), expected, key)
     }
   }

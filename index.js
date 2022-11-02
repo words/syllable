@@ -3,11 +3,11 @@ import pluralize from 'pluralize'
 import normalize from 'normalize-strings'
 import {problematic} from './problematic.js'
 
-var own = {}.hasOwnProperty
+const own = {}.hasOwnProperty
 
 // Two expressions of occurrences which normally would be counted as two
 // syllables, but should be counted as one.
-var EXPRESSION_MONOSYLLABIC_ONE = new RegExp(
+const EXPRESSION_MONOSYLLABIC_ONE = new RegExp(
   [
     'awe($|d|so)',
     'cia(?:l|$)',
@@ -63,7 +63,7 @@ var EXPRESSION_MONOSYLLABIC_ONE = new RegExp(
   'g'
 )
 
-var EXPRESSION_MONOSYLLABIC_TWO = new RegExp(
+const EXPRESSION_MONOSYLLABIC_TWO = new RegExp(
   '[aeiouy](?:' +
     [
       '[bcdfgklmnprstvyz]',
@@ -84,7 +84,7 @@ var EXPRESSION_MONOSYLLABIC_TWO = new RegExp(
 
 // Four expression of occurrences which normally would be counted as one
 // syllable, but should be counted as two.
-var EXPRESSION_DOUBLE_SYLLABIC_ONE = new RegExp(
+const EXPRESSION_DOUBLE_SYLLABIC_ONE = new RegExp(
   '(?:' +
     [
       '([^aeiouy])\\1l',
@@ -111,7 +111,7 @@ var EXPRESSION_DOUBLE_SYLLABIC_ONE = new RegExp(
   'g'
 )
 
-var EXPRESSION_DOUBLE_SYLLABIC_TWO = new RegExp(
+const EXPRESSION_DOUBLE_SYLLABIC_TWO = new RegExp(
   [
     'creat(?!u)',
     '[^gq]ua[^auieo]',
@@ -123,7 +123,7 @@ var EXPRESSION_DOUBLE_SYLLABIC_TWO = new RegExp(
   'g'
 )
 
-var EXPRESSION_DOUBLE_SYLLABIC_THREE = new RegExp(
+const EXPRESSION_DOUBLE_SYLLABIC_THREE = new RegExp(
   [
     '[^aeiou]y[ae]',
     '[^l]lien',
@@ -142,10 +142,10 @@ var EXPRESSION_DOUBLE_SYLLABIC_THREE = new RegExp(
   'g'
 )
 
-var EXPRESSION_DOUBLE_SYLLABIC_FOUR = /[^s]ia/
+const EXPRESSION_DOUBLE_SYLLABIC_FOUR = /[^s]ia/
 
 // Expression to match single syllable pre- and suffixes.
-var EXPRESSION_SINGLE = new RegExp(
+const EXPRESSION_SINGLE = new RegExp(
   [
     '^(?:' +
       [
@@ -187,7 +187,7 @@ var EXPRESSION_SINGLE = new RegExp(
 )
 
 // Expression to match double syllable pre- and suffixes.
-var EXPRESSION_DOUBLE = new RegExp(
+const EXPRESSION_DOUBLE = new RegExp(
   [
     '^' +
       '(?:' +
@@ -223,7 +223,7 @@ var EXPRESSION_DOUBLE = new RegExp(
 )
 
 // Expression to match triple syllable suffixes.
-var EXPRESSION_TRIPLE = /(creations?|ology|ologist|onomy|onomist)$/g
+const EXPRESSION_TRIPLE = /(creations?|ology|ologist|onomy|onomist)$/g
 
 // Wrapper to support multiple word-parts (GH-11).
 /**
@@ -233,14 +233,14 @@ var EXPRESSION_TRIPLE = /(creations?|ology|ologist|onomy|onomist)$/g
  * @returns {number}
  */
 export function syllable(value) {
-  var values = normalize(String(value))
+  const values = normalize(String(value))
     .toLowerCase()
     // Remove apostrophes.
     .replace(/['’]/g, '')
     // Split on word boundaries.
     .split(/\b/g)
-  var index = -1
-  var sum = 0
+  let index = -1
+  let sum = 0
 
   while (++index < values.length) {
     // Remove non-alphabetic characters from a given value.
@@ -257,17 +257,7 @@ export function syllable(value) {
  * @returns {number}
  */
 function one(value) {
-  var count = 0
-  /** @type {number} */
-  var index
-  /** @type {string} */
-  var singular
-  /** @type {Array.<string>} */
-  var parts
-  /** @type {ReturnType.<returnFactory>} */
-  var addOne
-  /** @type {ReturnType.<returnFactory>} */
-  var subtractOne
+  let count = 0
 
   if (value.length === 0) {
     return count
@@ -284,14 +274,14 @@ function one(value) {
   }
 
   // Additionally, the singular word might be in `problematic`.
-  singular = pluralize(value, 1)
+  const singular = pluralize(value, 1)
 
   if (own.call(problematic, singular)) {
     return problematic[singular]
   }
 
-  addOne = returnFactory(1)
-  subtractOne = returnFactory(-1)
+  const addOne = returnFactory(1)
+  const subtractOne = returnFactory(-1)
 
   // Count some prefixes and suffixes, and remove their matched ranges.
   value = value
@@ -300,8 +290,8 @@ function one(value) {
     .replace(EXPRESSION_SINGLE, countFactory(1))
 
   // Count multiple consonants.
-  parts = value.split(/[^aeiouy]+/)
-  index = -1
+  const parts = value.split(/[^aeiouy]+/)
+  let index = -1
 
   while (++index < parts.length) {
     if (parts[index] !== '') {

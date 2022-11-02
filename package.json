@@ -67,12 +67,7 @@
     "trailingComma": "none"
   },
   "xo": {
-    "prettier": true,
-    "rules": {
-      "import/no-mutable-exports": "off",
-      "no-var": "off",
-      "prefer-arrow-callback": "off"
-    }
+    "prettier": true
   },
   "remarkConfig": {
     "plugins": [

@@ -1,4 +1,4 @@
-export var problematic = {
+export const problematic = {
   abalone: 4,
   abare: 3,
   abbruzzese: 4,

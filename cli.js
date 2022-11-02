@@ -5,13 +5,13 @@ import {URL} from 'node:url'
 import {syllable} from './index.js'
 
 /** @type {Object.<string, unknown>} */
-var pack = JSON.parse(
+const pack = JSON.parse(
   String(fs.readFileSync(new URL('package.json', import.meta.url)))
 )
 
-var argv = process.argv.slice(2)
+const argv = process.argv.slice(2)
 
-var command = pack.name
+const command = pack.name
 
 if (argv.includes('--help') || argv.includes('-h')) {
   console.log(help())
@@ -29,7 +29,7 @@ if (argv.includes('--help') || argv.includes('-h')) {
  * @param {string} value
  */
 function getSyllables(value) {
-  var values = value
+  const values = value
     .split(/\s+/g)
     .map((/** @type {string} */ d) => d.trim())
     .filter(Boolean)
@@ -46,8 +46,8 @@ function getSyllables(value) {
  * @param {Array.<string>} values
  */
 function syllables(values) {
-  var sum = 0
-  var index = -1
+  let sum = 0
+  let index = -1
 
   while (++index < values.length) {
     sum += syllable(values[index])
