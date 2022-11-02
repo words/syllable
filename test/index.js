@@ -1,9 +1,9 @@
-import {exec} from 'child_process'
-import fs from 'fs'
-import {URL} from 'url'
-import {PassThrough} from 'stream'
-import {syllable} from '../index.js'
+import {exec} from 'node:child_process'
+import fs from 'node:fs'
+import {URL} from 'node:url'
+import {PassThrough} from 'node:stream'
 import test from 'tape'
+import {syllable} from '../index.js'
 
 var own = {}.hasOwnProperty
 
@@ -14,7 +14,7 @@ var pack = JSON.parse(
 
 /** @type {Object.<string, number>} */
 var fixtures = JSON.parse(
-  String(fs.readFileSync(new URL('./fixture.json', import.meta.url)))
+  String(fs.readFileSync(new URL('fixture.json', import.meta.url)))
 )
 
 test('api', function (t) {
@@ -170,35 +170,8 @@ test('api', function (t) {
       'ying'
     ].map((d) => syllable(d)),
     [
-      4,
-      3,
-      3,
-      3,
-      3,
-      3,
-      3,
-      3,
-      3,
-      3,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      1
+      4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+      2, 2, 2, 1
     ],
     'GH-37 (ying$)'
   )
