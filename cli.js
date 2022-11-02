@@ -4,7 +4,7 @@ import process from 'node:process'
 import {URL} from 'node:url'
 import {syllable} from './index.js'
 
-/** @type {Object.<string, unknown>} */
+/** @type {Record<string, unknown>} */
 const pack = JSON.parse(
   String(fs.readFileSync(new URL('package.json', import.meta.url)))
 )
@@ -43,7 +43,7 @@ function getSyllables(value) {
 }
 
 /**
- * @param {Array.<string>} values
+ * @param {Array<string>} values
  */
 function syllables(values) {
   let sum = 0

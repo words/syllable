@@ -1,3 +1,4 @@
+/** @type {Record<string, number>} */
 export const problematic = {
   abalone: 4,
   abare: 3,

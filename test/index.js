@@ -1,3 +1,4 @@
+import assert from 'node:assert/strict'
 import {exec} from 'node:child_process'
 import fs from 'node:fs'
 import {URL} from 'node:url'
@@ -7,12 +8,12 @@ import {syllable} from '../index.js'
 
 const own = {}.hasOwnProperty
 
-/** @type {Object.<string, unknown>} */
+/** @type {Record<string, unknown>} */
 const pack = JSON.parse(
   String(fs.readFileSync(new URL('../package.json', import.meta.url)))
 )
 
-/** @type {Object.<string, number>} */
+/** @type {Record<string, number>} */
 const fixtures = JSON.parse(
   String(fs.readFileSync(new URL('fixture.json', import.meta.url)))
 )
@@ -273,6 +274,7 @@ test('cli', function (t) {
     t.deepEqual([error, stdout, stderr], [null, '6\n', ''], 'stdin')
   })
 
+  assert(subprocess.stdin, 'expected `stdin` on child process')
   input.pipe(subprocess.stdin)
   input.write('syllab')
   setImmediate(function () {
