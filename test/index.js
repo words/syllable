@@ -1,10 +1,13 @@
 import assert from 'node:assert/strict'
-import {exec} from 'node:child_process'
+import cp from 'node:child_process'
 import fs from 'node:fs'
 import {URL} from 'node:url'
+import util from 'node:util'
 import {PassThrough} from 'node:stream'
-import test from 'tape'
+import test from 'node:test'
 import {syllable} from '../index.js'
+
+const exec = util.promisify(cp.exec)
 
 const own = {}.hasOwnProperty
 
@@ -18,44 +21,48 @@ const fixtures = JSON.parse(
   String(fs.readFileSync(new URL('fixture.json', import.meta.url)))
 )
 
-test('api', function (t) {
+test('api', function () {
   const result = syllable('syllables')
 
-  t.equal(syllable('SYLLABLES'), result, 'should be case insensitive (1)')
-  t.equal(syllable('SyLlABlEs'), result, 'should be case insensitive (2)')
+  assert.equal(syllable('SYLLABLES'), result, 'should be case insensitive (1)')
+  assert.equal(syllable('SyLlABlEs'), result, 'should be case insensitive (2)')
 
-  t.equal(syllable(''), 0, 'should return `0` when empty')
+  assert.equal(syllable(''), 0, 'should return `0` when empty')
 
-  t.equal(syllable('syllables'), 3, 'should work (1)')
-  t.equal(syllable('hoopty'), 2, 'should work (2)')
-  t.equal(syllable('mmmm'), 1, 'should work (3)')
-  t.equal(syllable('am'), 1, 'should work (4)')
+  assert.equal(syllable('syllables'), 3, 'should work (1)')
+  assert.equal(syllable('hoopty'), 2, 'should work (2)')
+  assert.equal(syllable('mmmm'), 1, 'should work (3)')
+  assert.equal(syllable('am'), 1, 'should work (4)')
 
-  t.equal(syllable('wine'), 1, 'should support multiple word-parts (1)')
-  t.equal(syllable('bottle'), 2, 'should support multiple word-parts (2)')
-  t.equal(syllable('wine-bottle'), 3, 'should support multiple word-parts (3)')
+  assert.equal(syllable('wine'), 1, 'should support multiple word-parts (1)')
+  assert.equal(syllable('bottle'), 2, 'should support multiple word-parts (2)')
+  assert.equal(
+    syllable('wine-bottle'),
+    3,
+    'should support multiple word-parts (3)'
+  )
 
-  t.equal(
+  assert.equal(
     syllable('Zoe'),
     syllable('Zoë'),
     'should support non-ascii characters (1)'
   )
-  t.equal(
+  assert.equal(
     syllable('Åland'),
     syllable('Aland'),
     'should support non-ascii characters (2)'
   )
 
-  t.equal(syllable('Snuffleupagus'), 5, 'GH-25 (snuffleupagus)')
-  t.equal(syllable('queue'), 1, 'GH-26 (queue)')
+  assert.equal(syllable('Snuffleupagus'), 5, 'GH-25 (snuffleupagus)')
+  assert.equal(syllable('queue'), 1, 'GH-26 (queue)')
 
-  t.deepEqual(
+  assert.deepEqual(
     ['real', 'deal', 'really'].map((d) => syllable(d)),
     [1, 1, 2],
     'GH-31 (real/deal/really)'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     [
       'awe',
       'awearied',
@@ -77,7 +84,7 @@ test('api', function (t) {
     'GH-32 (awe)'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     [
       'communion',
       'contagion',
@@ -105,7 +112,7 @@ test('api', function (t) {
     'GH-36 ([gnst]ion$)'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     [
       'anybody',
       'anymore',
@@ -123,7 +130,7 @@ test('api', function (t) {
     'GH-36 ^any'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     [
       'anyone',
       'everyone',
@@ -138,7 +145,7 @@ test('api', function (t) {
     'GH-36 one$'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     [
       'embodying',
       'annoying',
@@ -177,7 +184,7 @@ test('api', function (t) {
     'GH-37 (ying$)'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     [
       'shreds',
       'shredded',
@@ -190,7 +197,7 @@ test('api', function (t) {
     'GH-37 shredless'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     [
       'monotheist',
       'monotheists',
@@ -216,7 +223,7 @@ test('api', function (t) {
     'GH-37 (th|d)iest(s|ic)?)'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     [
       'reminiscense',
       'commonsense',
@@ -245,72 +252,62 @@ test('api', function (t) {
     [4, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1],
     'GH-39 ([aeiouy]nse$)'
   )
-
-  t.end()
 })
 
-test('cli', function (t) {
-  const input = new PassThrough()
+test('cli', async function () {
+  try {
+    await exec('./cli.js ""')
+    assert.fail('should not pass')
+  } catch (error) {
+    assert.ok(/Usage: syllable/.test(String(error)), 'not enough arguments')
+  }
 
-  t.plan(8)
+  assert.deepEqual(
+    await exec('./cli.js syllables'),
+    {stdout: '3\n', stderr: ''},
+    'one'
+  )
 
-  exec('./cli.js syllables', function (error, stdout, stderr) {
-    t.deepEqual([error, stdout, stderr], [null, '3\n', ''], 'one')
-  })
+  assert.deepEqual(
+    await exec('./cli.js syllables unicorns'),
+    {stdout: '6\n', stderr: ''},
+    'two'
+  )
 
-  exec('./cli.js syllables unicorns', function (error, stdout, stderr) {
-    t.deepEqual([error, stdout, stderr], [null, '6\n', ''], 'two')
-  })
-
-  exec('./cli.js ""', function (error, stdout, stderr) {
-    t.deepEqual(
-      [Boolean(error), stdout, /Usage: syllable/.test(stderr)],
-      [true, '', true],
-      'no arguments'
-    )
-  })
-
-  const subprocess = exec('./cli.js', function (error, stdout, stderr) {
-    t.deepEqual([error, stdout, stderr], [null, '6\n', ''], 'stdin')
-  })
-
-  assert(subprocess.stdin, 'expected `stdin` on child process')
-  input.pipe(subprocess.stdin)
-  input.write('syllab')
-  setImmediate(function () {
-    input.write('les uni')
+  await new Promise(function (resolve) {
+    const input = new PassThrough()
+    const subprocess = cp.exec('./cli.js', function (error, stdout, stderr) {
+      assert.deepEqual([error, stdout, stderr], [null, '6\n', ''], 'stdin')
+      setImmediate(resolve)
+    })
+    assert(subprocess.stdin, 'expected stdin on `subprocess`')
+    input.pipe(subprocess.stdin)
+    input.write('syllab')
     setImmediate(function () {
-      input.end('corns')
+      input.write(' les uni')
+      setImmediate(function () {
+        input.end('corns')
+      })
     })
   })
 
-  exec('./cli.js -h', function (error, stdout, stderr) {
-    t.deepEqual(
-      [error, /\sUsage: syllable/.test(stdout), stderr],
-      [null, true, ''],
-      '-h'
-    )
-  })
+  const h = await exec('./cli.js -h')
+  assert.ok(/\sUsage: syllable/.test(h.stdout), '-h')
 
-  exec('./cli.js --help', function (error, stdout, stderr) {
-    t.deepEqual(
-      [error, /\sUsage: syllable/.test(stdout), stderr],
-      [null, true, ''],
-      '--help'
-    )
-  })
+  const help = await exec('./cli.js --help')
+  assert.ok(/\sUsage: syllable/.test(help.stdout), '-h')
 
-  exec('./cli.js -v', function (error, stdout, stderr) {
-    t.deepEqual([error, stdout, stderr], [null, pack.version + '\n', ''], '-v')
-  })
+  assert.deepEqual(
+    await exec('./cli.js -v'),
+    {stdout: pack.version + '\n', stderr: ''},
+    '-v'
+  )
 
-  exec('./cli.js --version', function (error, stdout, stderr) {
-    t.deepEqual(
-      [error, stdout, stderr],
-      [null, pack.version + '\n', ''],
-      '--version'
-    )
-  })
+  assert.deepEqual(
+    await exec('./cli.js --version'),
+    {stdout: pack.version + '\n', stderr: ''},
+    '--version'
+  )
 })
 
 // Fixtures.
@@ -323,7 +320,7 @@ test('cli', function (t) {
 //
 // This library focusses on the required Text-Statistics tests (the library
 // provides both optional and required tests).
-test('fixtures', function (t) {
+test('fixtures', function () {
   const overwrite = {
     // GH-22: <https://github.com/words/syllable/issues/22>,
     // Barbed is one syllable as well:
@@ -336,9 +333,7 @@ test('fixtures', function (t) {
   for (key in fixtures) {
     if (own.call(fixtures, key)) {
       const expected = (key in overwrite ? overwrite : fixtures)[key]
-      t.equal(syllable(key), expected, key)
+      assert.equal(syllable(key), expected, key)
     }
   }
-
-  t.end()
 })
