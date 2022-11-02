@@ -225,12 +225,13 @@ const EXPRESSION_DOUBLE = new RegExp(
 // Expression to match triple syllable suffixes.
 const EXPRESSION_TRIPLE = /(creations?|ology|ologist|onomy|onomist)$/g
 
-// Wrapper to support multiple word-parts (GH-11).
 /**
- * Syllable count
+ * Count syllables in `value`.
  *
  * @param {string} value
+ *   Value to check.
  * @returns {number}
+ *   Syllables in `value`.
  */
 export function syllable(value) {
   const values = normalize(String(value))
@@ -251,7 +252,7 @@ export function syllable(value) {
 }
 
 /**
- * Get syllables in a given value.
+ * Get syllables in a word.
  *
  * @param {string} value
  * @returns {number}
